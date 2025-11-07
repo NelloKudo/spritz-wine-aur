@@ -1,0 +1,67 @@
+From 8d696e9ae6cdf7e76d6ef069cce2b60754174eef Mon Sep 17 00:00:00 2001
+From: NelloKudo <marshnelloosu@gmail.com>
+Date: Fri, 7 Nov 2025 16:20:41 +0100
+Subject: [PATCH 13/13] HACK: kernelbase: Delay CreateProcessInternalW for
+ miniloader installers.
+
+Miniloader installers (WeGame, Nikke..) fail to download their games due to a
+race condition which is seemingly fixed by simply sleeping for 1 second.
+Also added WINE_MINILOADER_NAME to use the hack also with
+games not hardcoded in source (e.g. WINE_MINILOADER_NAME="nikkeminiloader.exe")
+---
+ dlls/kernelbase/process.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+diff --git a/dlls/kernelbase/process.c b/dlls/kernelbase/process.c
+index f4a9a3aa5ae..1143b137dc1 100644
+--- a/dlls/kernelbase/process.c
++++ b/dlls/kernelbase/process.c
+@@ -499,6 +499,31 @@ done:
+     return ret;
+ }
+ 
++static BOOL is_miniloader(void)
++{
++    static volatile char cache = -1;
++    BOOL ret = cache;
++    if (ret == -1)
++    {
++        const WCHAR *p, *name = NtCurrentTeb()->Peb->ProcessParameters->ImagePathName.Buffer;
++        WCHAR env_exe[MAX_PATH];
++        DWORD len;
++
++        if ((p = wcsrchr(name, '/'))) name = p + 1;
++        if ((p = wcsrchr(name, '\\'))) name = p + 1;
++
++        len = GetEnvironmentVariableW(L"WINE_MINILOADER_NAME", env_exe, MAX_PATH);
++
++        ret = (!wcsicmp(name, L"nikkeminiloader.exe") ||
++               !wcsicmp(name, L"nikke_launcher.exe") || 
++               !wcsicmp(name, L"WeGameMiniLoader.exe") ||
++               !wcsicmp(name, L"wegame.exe") ||
++               (len > 0 && len < MAX_PATH && !wcsicmp(name, env_exe)));
++        cache = ret;
++    }
++    return ret;
++}
++
+ /**********************************************************************
+  *           CreateProcessInternalW   (kernelbase.@)
+  */
+@@ -673,6 +698,13 @@ BOOL WINAPI DECLSPEC_HOTPATCH CreateProcessInternalW( HANDLE token, const WCHAR
+  done:
+     RtlDestroyProcessParameters( params );
+     if (tidy_cmdline != cmd_line) HeapFree( GetProcessHeap(), 0, tidy_cmdline );
++    
++    if (is_miniloader())
++    {
++        FIXME( "HACK: miniloader detected, sleeping..\n" );
++        Sleep(1000);
++    }
++    
+     return set_ntstatus( status );
+ }
+ 
+-- 
+2.51.2
+
