@@ -1,4 +1,4 @@
-From 5c293f47b03898d3de8272c0279c9211cc6f500e Mon Sep 17 00:00:00 2001
+From db06992fdbb899d304862c0a83c35fd87de448ab Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Wed, 10 Sep 2025 01:12:08 +0200
 Subject: [PATCH 01/13] winediag: change logging and redirect to Spritz
@@ -9,10 +9,10 @@ Subject: [PATCH 01/13] winediag: change logging and redirect to Spritz
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/dlls/ntdll/loader.c b/dlls/ntdll/loader.c
-index baae1c9c60c..a5c466d951a 100644
+index ad0401d8981..50d21e2d366 100644
 --- a/dlls/ntdll/loader.c
 +++ b/dlls/ntdll/loader.c
-@@ -4602,12 +4602,12 @@ void loader_init( CONTEXT *context, void **entry )
+@@ -4617,12 +4617,12 @@ void loader_init( CONTEXT *context, void **entry )
      InitializeObjectAttributes( &staging_event_attr, &staging_event_string, OBJ_OPENIF, NULL, NULL );
      if (NtCreateEvent( &staging_event, EVENT_ALL_ACCESS, &staging_event_attr, NotificationEvent, FALSE ) == STATUS_SUCCESS)
      {
@@ -29,5 +29,5 @@ index baae1c9c60c..a5c466d951a 100644
      }
  
 -- 
-2.51.2
+2.52.0
 

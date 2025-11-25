@@ -1,0 +1,55 @@
+From 4296c9693f6026d09cddeb84277bbead5f1badab Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Wed, 23 Jul 2025 01:06:02 -0400
+Subject: [PATCH 26/44] ntoskrnl: Implement PsGetContextThread.
+
+---
+ dlls/ntoskrnl.exe/ntoskrnl.c        | 17 +++++++++++++++++
+ dlls/ntoskrnl.exe/ntoskrnl.exe.spec |  2 +-
+ 2 files changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
+index cffa2feff10..c34bfbccc6e 100644
+--- a/dlls/ntoskrnl.exe/ntoskrnl.c
++++ b/dlls/ntoskrnl.exe/ntoskrnl.c
+@@ -2754,6 +2754,23 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
+     return thread->kthread.id.UniqueProcess;
+ }
+ 
++/*********************************************************************
++ *           PsGetContextThread    (NTOSKRNL.@)
++ */
++NTSTATUS WINAPI PsGetContextThread(PETHREAD thread, CONTEXT *context)
++{
++    HANDLE handle;
++    NTSTATUS status;
++    ULONG_PTR id = (ULONG_PTR) PsGetThreadId(thread);
++
++    if (!(handle = OpenThread(THREAD_ALL_ACCESS, FALSE, id)))
++        return STATUS_NOT_FOUND;
++
++    status = NtGetContextThread(handle, context);
++    NtClose(handle);
++    return status;
++}
++
+ /***********************************************************************
+  *           KeInsertQueue   (NTOSKRNL.EXE.@)
+  */
+diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
+index e60bfcb466a..5379e389856 100644
+--- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
++++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
+@@ -909,7 +909,7 @@
+ @ stub PsDereferencePrimaryToken
+ @ stub PsDisableImpersonation
+ @ stub PsEstablishWin32Callouts
+-@ stub PsGetContextThread
++@ stdcall PsGetContextThread(ptr ptr)
+ @ stdcall PsGetCurrentProcess() IoGetCurrentProcess
+ @ stdcall PsGetCurrentProcessId()
+ @ stdcall PsGetCurrentProcessSessionId()
+-- 
+2.52.0
+

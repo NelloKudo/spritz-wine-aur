@@ -15,16 +15,14 @@ These builds are different from the [AAGL builds](https://github.com/NelloKudo/W
 - Rebased to **latest wine-staging**
 - Backported/reworked many patches from Proton, mostly aiming controllers
 - Includes many of Wine-TkG's fixes
-- Includes backports from Proton-EM [https://github.com/Etaash-mathamsetty/Proton]
+- Includes backports from [Proton-EM](https://github.com/Etaash-mathamsetty/Proton)
 - Fixes various issues with **certain anime games**
-- Fixes downloads with miniloader launchers
 - Includes some QoL fixes for dropping inputs, random crashes and alt-tabbing.
 
 ## Useful environmental variables
 
 - Spritz patches:
   - `PROTON_DISABLE_AEDEBUG=1`: disables AeDebug, fixes issues with some games
-  - `WINE_MINILOADER_NAME="game.exe"`: enables the miniloader download fix hack for the specified executable name
   - `WINE_DISABLE_DISCONNECT=1`: disables the disconnecting trick when enabled by default
   - `WINE_ENABLE_DISCONNECT=1`: enables the disconnecting trick
   - `WINE_ENABLE_STEAM_STUB=1`: launches the executable using the `steam.exe` stub in the builds

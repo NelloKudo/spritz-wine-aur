@@ -1,0 +1,60 @@
+From 070962b8e1543885ea4ae0fdfa951ec16a3bd190 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
+Date: Thu, 26 Jan 2023 15:09:21 -0500
+Subject: [PATCH 02/44] ntoskrnl.exe: Implement KeReleaseGuardedMutex.
+
+---
+ dlls/ntoskrnl.exe/ntoskrnl.exe.spec |  2 ++
+ dlls/ntoskrnl.exe/sync.c            | 23 +++++++++++++++++++++++
+ 2 files changed, 25 insertions(+)
+
+diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
+index cea2538c719..70999698499 100644
+--- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
++++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
+@@ -60,6 +60,8 @@
+ @ stdcall KeLeaveGuardedRegion()
+ @ stdcall -arch=!i386 KeReleaseInStackQueuedSpinLock(ptr)
+ @ stdcall -fastcall KeReleaseInStackQueuedSpinLockFromDpcLevel(ptr)
++@ stdcall KeReleaseGuardedMutexUnsafe(ptr)
++@ stdcall KeReleaseGuardedMutex(ptr)
+ @ stub KeSetTimeUpdateNotifyRoutine
+ @ stub KefAcquireSpinLockAtDpcLevel
+ @ stub KefReleaseSpinLockFromDpcLevel
+diff --git a/dlls/ntoskrnl.exe/sync.c b/dlls/ntoskrnl.exe/sync.c
+index b9484a7d1a8..4674a3a8924 100644
+--- a/dlls/ntoskrnl.exe/sync.c
++++ b/dlls/ntoskrnl.exe/sync.c
+@@ -461,6 +461,29 @@ void WINAPI KeAcquireGuardedMutex(PKGUARDED_MUTEX mutex)
+     KeAcquireGuardedMutexUnsafe(mutex);
+ }
+ 
++/***********************************************************************
++ *           KeReleaseGuardedMutexUnsafe   (NTOSKRNL.EXE.@)
++ */
++void WINAPI KeReleaseGuardedMutexUnsafe(PKGUARDED_MUTEX mutex)
++{
++    LONG count;
++
++    TRACE("mutex %p.\n", mutex);
++
++    count = InterlockedIncrement( &mutex->Count );
++    if (count < 1)
++        KeSetEvent( &mutex->Event, IO_NO_INCREMENT, FALSE );
++}
++
++/***********************************************************************
++ *           KeReleaseGuardedMutex   (NTOSKRNL.EXE.@)
++ */
++void WINAPI KeReleaseGuardedMutex(PKGUARDED_MUTEX mutex)
++{
++    KeReleaseGuardedMutexUnsafe(mutex);
++    /* FIXME: Leave Guarded Region */
++}
++
+ static void CALLBACK ke_timer_complete_proc(PTP_CALLBACK_INSTANCE instance, void *timer_, PTP_TIMER tp_timer)
+ {
+     KTIMER *timer = timer_;
+-- 
+2.52.0
+

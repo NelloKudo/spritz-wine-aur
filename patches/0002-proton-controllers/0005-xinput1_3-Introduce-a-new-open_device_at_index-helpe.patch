@@ -1,7 +1,7 @@
-From 040b53f9135f86330739b20f0ec1371499d26a14 Mon Sep 17 00:00:00 2001
+From 07bb51059fffde39c20d51dc3dc72786133f23c6 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 23 Nov 2022 01:02:13 +0100
-Subject: [PATCH 4/6] xinput1_3: Introduce a new open_device_at_index helper.
+Subject: [PATCH 5/7] xinput1_3: Introduce a new open_device_at_index helper.
 
 CW-Bug-Id: #20528
 ---
@@ -96,5 +96,5 @@ index 4fd9e42f7ca..9b741032f4f 100644
  {
      int i;
 -- 
-2.51.2
+2.52.0
 

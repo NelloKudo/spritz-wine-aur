@@ -1,4 +1,4 @@
-From 7e24ce8f365ad902251d08ccc6a10af4908cee54 Mon Sep 17 00:00:00 2001
+From 28d441b891b30fcceb837929e15bdbf53af28a64 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Sat, 12 Jul 2025 14:38:28 +0200
 Subject: [PATCH 07/13] HACK: winex11: make WM focus the window by default
@@ -9,7 +9,7 @@ From a patch first included in Proton 8, fixes issues with Unity games losing in
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/dlls/winex11.drv/x11drv_main.c b/dlls/winex11.drv/x11drv_main.c
-index 1830e5f424b..5f9bbb2963d 100644
+index bb6413e2679..f5e589db038 100644
 --- a/dlls/winex11.drv/x11drv_main.c
 +++ b/dlls/winex11.drv/x11drv_main.c
 @@ -69,7 +69,7 @@ BOOL usexvidmode = TRUE;
@@ -22,5 +22,5 @@ index 1830e5f424b..5f9bbb2963d 100644
  BOOL use_system_cursors = TRUE;
  BOOL grab_fullscreen = FALSE;
 -- 
-2.51.2
+2.52.0
 

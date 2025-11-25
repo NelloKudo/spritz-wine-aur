@@ -1,4 +1,4 @@
-From 325226e31c4074fda9eec336c8f77a974830605f Mon Sep 17 00:00:00 2001
+From 4534ad78b85e58a0d57a6c6ecda2075ffdc1c348 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Fri, 13 Jun 2025 21:34:02 +0200
 Subject: [PATCH 06/13] HACK: kernelbase: Terminate Genshin Impact if
@@ -11,10 +11,10 @@ just terminate the process if that happens, instead.
  1 file changed, 30 insertions(+), 2 deletions(-)
 
 diff --git a/dlls/kernelbase/main.c b/dlls/kernelbase/main.c
-index 31cf024f7ff..02faa75a882 100644
+index 0e198195983..20c111239b2 100644
 --- a/dlls/kernelbase/main.c
 +++ b/dlls/kernelbase/main.c
-@@ -96,6 +96,24 @@ LONG WINAPI AppPolicyGetMediaFoundationCodecLoading(HANDLE token, AppPolicyMedia
+@@ -95,6 +95,24 @@ LONG WINAPI AppPolicyGetMediaFoundationCodecLoading(HANDLE token, AppPolicyMedia
      return ERROR_SUCCESS;
  }
  
@@ -39,7 +39,7 @@ index 31cf024f7ff..02faa75a882 100644
  /***********************************************************************
   *          AppPolicyGetProcessTerminationMethod (KERNELBASE.@)
   */
-@@ -103,8 +121,18 @@ LONG WINAPI AppPolicyGetProcessTerminationMethod(HANDLE token, AppPolicyProcessT
+@@ -102,8 +120,18 @@ LONG WINAPI AppPolicyGetProcessTerminationMethod(HANDLE token, AppPolicyProcessT
  {
      FIXME("%p, %p\n", token, policy);
  
@@ -61,5 +61,5 @@ index 31cf024f7ff..02faa75a882 100644
      return ERROR_SUCCESS;
  }
 -- 
-2.51.2
+2.52.0
 

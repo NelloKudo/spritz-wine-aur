@@ -1,4 +1,4 @@
-From ec133bbe8230d5f175808b56e351cb9e6134b74c Mon Sep 17 00:00:00 2001
+From 3c7e27df63513c2eb54cb03ef808c1e1dc89233e Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 14 Aug 2025 14:18:26 +0200
 Subject: [PATCH 02/13] HACK: ws2_32: Block first internet connection for some
@@ -64,5 +64,5 @@ index ce0c6ce7856..9a0627bc481 100644
      char *unix_path = NULL;
      int unix_varargs_size = 0;
 -- 
-2.51.2
+2.52.0
 

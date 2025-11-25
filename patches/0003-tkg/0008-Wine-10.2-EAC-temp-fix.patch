@@ -1,4 +1,4 @@
-From 5db0e023771b38fdd998a68cacafbcf58190f479 Mon Sep 17 00:00:00 2001
+From fe0387d858638dc664504e525f383bb52b3aa9a4 Mon Sep 17 00:00:00 2001
 From: Vingian <89702391+Vingian@users.noreply.github.com>
 Date: Mon, 24 Feb 2025 15:07:47 -0300
 Subject: [PATCH 8/8] Wine 10.2+ EAC temp fix.
@@ -12,10 +12,10 @@ This is just a temporary fix until EAC gets updated.
  3 files changed, 32 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 861cbd20d1b..fab61b659e0 100644
+index 439e6738afd..28be9ff9a58 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -2091,7 +2091,13 @@ fi
+@@ -2087,7 +2087,13 @@ fi
  
  dnl **** Platform-specific checks ****
  
@@ -30,7 +30,7 @@ index 861cbd20d1b..fab61b659e0 100644
  
  case $host_os in
    linux*)
-@@ -2104,7 +2110,8 @@ esac
+@@ -2100,7 +2106,8 @@ esac
  
  if test "$wine_use_preloader" = "yes"
  then
@@ -41,7 +41,7 @@ index 861cbd20d1b..fab61b659e0 100644
  fi
  
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index d1c32c029ae..9bac358d616 100644
+index 1be9ab4eee1..15c8e6fec39 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
 @@ -455,7 +455,11 @@ static void init_paths(void)
@@ -103,5 +103,5 @@ index a9ca82f3321..01a48b01a53 100644
 +wine64_preloader_DEPS = $(WINELOADER_DEPENDS)
 +wine64_preloader_LDFLAGS = $(WINEPRELOADER_LDFLAGS)
 -- 
-2.51.2
+2.52.0
 

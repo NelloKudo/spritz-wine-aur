@@ -1,4 +1,4 @@
-From 9cee50a517725c5c604897925d94d05947b158c3 Mon Sep 17 00:00:00 2001
+From b3247c86bf8a4cbaeb070b2df654f0c426274119 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 6 Nov 2025 14:30:53 +0100
 Subject: [PATCH 12/13] HACK: kernelbase: Disable AeDebug with
@@ -48,5 +48,5 @@ index c18cabc65fb..ba47e6be588 100644
      {
          size_t format_size = lstrlenW( format ) + 2*20;
 -- 
-2.51.2
+2.52.0
 

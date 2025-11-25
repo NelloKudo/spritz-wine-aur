@@ -582,12 +582,6 @@ main() {
         tools/make_specfiles
     }
 
-    # Only ask for non-cachy/valve builds
-    if [[ "$USE_CACHY" == "false" && "$USE_VALVE" == "false" ]]; then
-        chmod +x tools/make_makefiles
-        tools/make_makefiles
-    fi
-
     autoreconf -fiv
     # Build and package
     build_wine

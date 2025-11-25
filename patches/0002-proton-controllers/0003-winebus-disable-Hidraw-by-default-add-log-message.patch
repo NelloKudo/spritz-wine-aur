@@ -1,7 +1,7 @@
-From 904f2f9dfdc3b2a0a6c12a20b2232f91c745b406 Mon Sep 17 00:00:00 2001
+From d1eccb1ed1c30664bf7bfe47198bee373ea4e11d Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 17:07:35 +0200
-Subject: [PATCH 2/6] winebus: disable Hidraw by default, add log message
+Subject: [PATCH 3/7] winebus: disable Hidraw by default, add log message
 
 Disabling Hidraw is needed for most controllers to work without issues: using it though, breaks
 PlayStation glyphs for games with native dualsense support. Hence, notify the user about it
@@ -35,5 +35,5 @@ index 2f66e597bcd..005fbf5ebd4 100644
      options.disable_input = check_bus_option(L"DisableInput", 0);
      if (options.disable_input) TRACE("UDEV input devices disabled in registry\n");
 -- 
-2.51.2
+2.52.0
 

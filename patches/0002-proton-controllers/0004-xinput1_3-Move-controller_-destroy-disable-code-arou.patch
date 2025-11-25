@@ -1,7 +1,7 @@
-From 4b121b55beb1cbba94a07160e854baa3adcdb35c Mon Sep 17 00:00:00 2001
+From ec69a89837e0e8971cda098fbae5f779e425a73f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 23 Nov 2022 01:02:13 +0100
-Subject: [PATCH 3/6] xinput1_3: Move controller_(destroy|disable) code around.
+Subject: [PATCH 4/7] xinput1_3: Move controller_(destroy|disable) code around.
 
 CW-Bug-Id: #20528
 ---
@@ -102,5 +102,5 @@ index c1ad48e3fc4..4fd9e42f7ca 100644
  {
      UINT sign = 1 << (caps->BitSize - 1);
 -- 
-2.51.2
+2.52.0
 

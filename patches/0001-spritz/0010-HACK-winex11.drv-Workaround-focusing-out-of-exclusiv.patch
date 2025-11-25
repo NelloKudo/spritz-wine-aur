@@ -1,4 +1,4 @@
-From c166f788e2b72b256387f7f4a80aea72d10ce699 Mon Sep 17 00:00:00 2001
+From d6b6416aa6721e4840268f8c0daf0063b9fd26e0 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 14 Dec 2022 21:21:50 +0100
 Subject: [PATCH 10/13] HACK: winex11.drv: Workaround focusing out of exclusive
@@ -28,10 +28,10 @@ Original commits were:
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/winex11.drv/window.c b/dlls/winex11.drv/window.c
-index 9fdda2e45c9..21bfa7fb7f9 100644
+index 5a4f76a8533..dd819c09748 100644
 --- a/dlls/winex11.drv/window.c
 +++ b/dlls/winex11.drv/window.c
-@@ -1395,7 +1395,15 @@ static void update_net_wm_states( struct x11drv_win_data *data )
+@@ -1498,7 +1498,15 @@ static void update_net_wm_states( struct x11drv_win_data *data )
          new_state |= (1 << NET_WM_STATE_MAXIMIZED);
  
      ex_style = NtUserGetWindowLongW( data->hwnd, GWL_EXSTYLE );
@@ -49,5 +49,5 @@ index 9fdda2e45c9..21bfa7fb7f9 100644
      if (!data->add_taskbar)
      {
 -- 
-2.51.2
+2.52.0
 

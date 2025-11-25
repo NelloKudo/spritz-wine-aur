@@ -1,0 +1,33 @@
+From 1445c6bbb5b14a5fbef3da6913b4c749b6b4fb52 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Thu, 24 Jul 2025 18:27:53 -0400
+Subject: [PATCH 41/44] HACK: ntoskrnl: Add stub Disk driver.
+
+---
+ dlls/ntoskrnl.exe/ntoskrnl.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
+index 80a50fcfc9a..d0a24997e8d 100644
+--- a/dlls/ntoskrnl.exe/ntoskrnl.c
++++ b/dlls/ntoskrnl.exe/ntoskrnl.c
+@@ -5050,6 +5050,7 @@ BOOL WINAPI DllMain( HINSTANCE inst, DWORD reason, LPVOID reserved )
+     LARGE_INTEGER count;
+     UNICODE_STRING str = RTL_CONSTANT_STRING( L"\\Driver\\pci" );
+     UNICODE_STRING hidusb = RTL_CONSTANT_STRING( L"\\Driver\\hidusb" );
++    UNICODE_STRING disk = RTL_CONSTANT_STRING( L"\\Driver\\Disk" );
+ 
+     switch(reason)
+     {
+@@ -5065,6 +5066,7 @@ BOOL WINAPI DllMain( HINSTANCE inst, DWORD reason, LPVOID reserved )
+         LdrRegisterDllNotification( 0, ldr_notify_callback, NULL, &ldr_notify_cookie );
+         IoCreateDriver(&str, driver_stub);
+         IoCreateDriver(&hidusb, driver_stub);
++        IoCreateDriver(&disk, driver_stub);
+         break;
+     case DLL_PROCESS_DETACH:
+         LdrUnregisterDllNotification( ldr_notify_cookie );
+-- 
+2.52.0
+

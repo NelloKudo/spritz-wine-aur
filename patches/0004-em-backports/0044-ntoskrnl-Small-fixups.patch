@@ -1,0 +1,44 @@
+From 0e467f1262743ba0694ffe0db141307534e13875 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
+Date: Sun, 27 Jul 2025 10:28:40 -0400
+Subject: [PATCH 44/44] ntoskrnl: Small fixups
+
+---
+ dlls/ntoskrnl.exe/ntoskrnl.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
+index db8e16e79ca..93895888de3 100644
+--- a/dlls/ntoskrnl.exe/ntoskrnl.c
++++ b/dlls/ntoskrnl.exe/ntoskrnl.c
+@@ -3104,6 +3104,9 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
+     return ret;
+ }
+ 
++/***********************************************************************
++ *           MmGetPhysicalMemoryRanges   (NTOSKRNL.EXE.@)
++ */
+ PHYSICAL_MEMORY_RANGE *WINAPI MmGetPhysicalMemoryRanges(void)
+ {
+     static volatile LONG once;
+@@ -3116,7 +3119,7 @@ PHYSICAL_MEMORY_RANGE *WINAPI MmGetPhysicalMemoryRanges(void)
+     {
+         NtQuerySystemInformation(SystemBasicInformation, &info, sizeof(info), NULL);
+         range.BaseAddress.QuadPart = info.MmLowestPhysicalPage;
+-        range.NumberOfBytes.QuadPart = info.MmNumberOfPhysicalPages * info.PageSize;
++        range.NumberOfBytes.QuadPart = (ULONG64)info.MmNumberOfPhysicalPages * (ULONG64)info.PageSize;
+     }
+ 
+     return &range;
+@@ -3245,7 +3248,7 @@ NTSTATUS WINAPI ObReferenceObjectByName( UNICODE_STRING *ObjectName,
+                                          POBJECT_TYPE ObjectType,
+                                          KPROCESSOR_MODE AccessMode,
+                                          void *ParseContext,
+-                                         void **Object)
++                                         void **Object )
+ {
+     NTSTATUS ret = STATUS_SUCCESS;
+     struct wine_driver *driver;
+-- 
+2.52.0
+
