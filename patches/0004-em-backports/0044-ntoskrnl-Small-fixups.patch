@@ -1,4 +1,4 @@
-From 0e467f1262743ba0694ffe0db141307534e13875 Mon Sep 17 00:00:00 2001
+From 041f2fba7925001682562e5ced4a2ad6ebefb81a Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Sun, 27 Jul 2025 10:28:40 -0400
 Subject: [PATCH 44/44] ntoskrnl: Small fixups

@@ -1,4 +1,4 @@
-From c17525d627b00448fed1dab919c21fb5cf2d1ee0 Mon Sep 17 00:00:00 2001
+From 18af16f79b38859aa2ffa1640f88e74ee607861a Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Wed, 19 Nov 2025 14:42:54 +0100
 Subject: [PATCH 13/13] iphlpapi: Add semi-stub for GetOwnerModuleFromTcpEntry.
@@ -23,7 +23,7 @@ index 81aeecd004e..9dad2be88ce 100644
  #@ stub GetOwnerModuleFromUdpEntry
  @ stdcall GetPerAdapterInfo( long ptr ptr )
 diff --git a/dlls/iphlpapi/iphlpapi_main.c b/dlls/iphlpapi/iphlpapi_main.c
-index 5ca8bf9d3f1..42ef4e821dc 100644
+index 7b37c1e4380..abfa6cddd27 100644
 --- a/dlls/iphlpapi/iphlpapi_main.c
 +++ b/dlls/iphlpapi/iphlpapi_main.c
 @@ -48,6 +48,15 @@ WINE_DEFAULT_DEBUG_CHANNEL(iphlpapi);

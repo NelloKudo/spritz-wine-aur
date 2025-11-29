@@ -1,4 +1,4 @@
-From 3e8494dcf5ef1dc833e0e46c13480f7a6d2b627a Mon Sep 17 00:00:00 2001
+From f77d43784b6a238a2601de38df6346a0b012a442 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Mon, 14 Jul 2025 22:31:22 -0400
 Subject: [PATCH 04/44] ntoskrnl: Fixup control register emulation on amd64.

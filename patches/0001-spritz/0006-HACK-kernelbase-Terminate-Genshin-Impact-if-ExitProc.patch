@@ -1,4 +1,4 @@
-From 4534ad78b85e58a0d57a6c6ecda2075ffdc1c348 Mon Sep 17 00:00:00 2001
+From 7d6b5cb94c81c7e4fe8f5280f86704b11eab784d Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Fri, 13 Jun 2025 21:34:02 +0200
 Subject: [PATCH 06/13] HACK: kernelbase: Terminate Genshin Impact if

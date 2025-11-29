@@ -1,4 +1,4 @@
-From b3247c86bf8a4cbaeb070b2df654f0c426274119 Mon Sep 17 00:00:00 2001
+From 573acf39a87ece0f7838623f541a04f202764450 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 6 Nov 2025 14:30:53 +0100
 Subject: [PATCH 12/13] HACK: kernelbase: Disable AeDebug with
@@ -10,7 +10,7 @@ Workarounds some issues with some games.
  1 file changed, 20 insertions(+)
 
 diff --git a/dlls/kernelbase/debug.c b/dlls/kernelbase/debug.c
-index c18cabc65fb..ba47e6be588 100644
+index 3abbc637f5b..7619cabc11f 100644
 --- a/dlls/kernelbase/debug.c
 +++ b/dlls/kernelbase/debug.c
 @@ -563,6 +563,25 @@ static BOOL start_debugger( EXCEPTION_POINTERS *epointers, HANDLE event )

@@ -1,4 +1,4 @@
-From 5227fcc2214d36f5284863f06e7a72c6f3863e07 Mon Sep 17 00:00:00 2001
+From c03b71a43db01ab5a782b3d3247d6b69c01ad022 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 25 Aug 2025 23:25:25 +0200
 Subject: [PATCH 04/13] ntdll: Allow launching apps from steam.exe stub

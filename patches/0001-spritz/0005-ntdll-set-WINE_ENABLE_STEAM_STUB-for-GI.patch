@@ -1,4 +1,4 @@
-From 9608c57fbe145b613338f5eac1f90fc26884c199 Mon Sep 17 00:00:00 2001
+From 9141c1397002fbcd5ff2674c2dd37825abb998a8 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 18 Sep 2025 11:50:52 +0200
 Subject: [PATCH 05/13] ntdll: set WINE_ENABLE_STEAM_STUB for GI
