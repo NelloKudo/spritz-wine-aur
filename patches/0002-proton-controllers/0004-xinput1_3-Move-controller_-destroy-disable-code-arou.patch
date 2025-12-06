@@ -1,4 +1,4 @@
-From a2f1a5201f360693a01f8981df857346f13a35ab Mon Sep 17 00:00:00 2001
+From 713023671c8ffd19588de8a407103a516058a428 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 23 Nov 2022 01:02:13 +0100
 Subject: [PATCH 4/7] xinput1_3: Move controller_(destroy|disable) code around.

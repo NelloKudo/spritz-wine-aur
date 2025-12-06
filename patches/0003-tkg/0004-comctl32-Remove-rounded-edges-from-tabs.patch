@@ -1,4 +1,4 @@
-From 1f5dff4e18a7c72bb64293022b314580fcb9dc31 Mon Sep 17 00:00:00 2001
+From 8242e67c4be09646831b79727eb6d3820bd841a8 Mon Sep 17 00:00:00 2001
 From: Joshua Ashton <joshua@froggi.es>
 Date: Thu, 16 Jul 2020 10:18:14 +0100
 Subject: [PATCH 4/8] comctl32: Remove rounded edges from tabs

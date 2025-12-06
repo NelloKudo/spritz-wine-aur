@@ -1,4 +1,4 @@
-From b3e7a7a73efb4ff986b1e8d414bbd532cb1f93df Mon Sep 17 00:00:00 2001
+From aa96dc4d1270573ab5efb9c3a39bf36e85cb312b Mon Sep 17 00:00:00 2001
 From: Vingian <89702391+Vingian@users.noreply.github.com>
 Date: Mon, 24 Feb 2025 15:07:47 -0300
 Subject: [PATCH 8/8] Wine 10.2+ EAC temp fix.
@@ -12,7 +12,7 @@ This is just a temporary fix until EAC gets updated.
  3 files changed, 32 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 439e6738afd..28be9ff9a58 100644
+index 79753409fca..c5c3faf4f90 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -2087,7 +2087,13 @@ fi

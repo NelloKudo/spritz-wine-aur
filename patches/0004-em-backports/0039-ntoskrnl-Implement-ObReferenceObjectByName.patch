@@ -1,4 +1,4 @@
-From d1f8c1c8c1a921c7e52ac06429f87f9f0446819e Mon Sep 17 00:00:00 2001
+From 82733c453a478602a155ac83b791b2547bb4d291 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 24 Jul 2025 17:42:00 -0400
@@ -97,10 +97,10 @@ index 68dd2d58ffe..cefac4dfd4b 100644
          ERR("Failed to locate loaded driver %s.\n", debugstr_w(driver));
          return;
 diff --git a/include/wine/server_protocol.h b/include/wine/server_protocol.h
-index ba250d70abb..85f33f23044 100644
+index 0df71549769..a6c0f4b9314 100644
 --- a/include/wine/server_protocol.h
 +++ b/include/wine/server_protocol.h
-@@ -5422,6 +5422,22 @@ struct get_kernel_object_handle_reply
+@@ -5424,6 +5424,22 @@ struct get_kernel_object_handle_reply
  
  
  
@@ -123,7 +123,7 @@ index ba250d70abb..85f33f23044 100644
  struct make_process_system_request
  {
      struct request_header __header;
-@@ -6444,6 +6460,7 @@ enum request
+@@ -6446,6 +6462,7 @@ enum request
      REQ_grab_kernel_object,
      REQ_release_kernel_object,
      REQ_get_kernel_object_handle,
@@ -131,7 +131,7 @@ index ba250d70abb..85f33f23044 100644
      REQ_make_process_system,
      REQ_grant_process_admin_token,
      REQ_get_token_info,
-@@ -6758,6 +6775,7 @@ union generic_request
+@@ -6760,6 +6777,7 @@ union generic_request
      struct grab_kernel_object_request grab_kernel_object_request;
      struct release_kernel_object_request release_kernel_object_request;
      struct get_kernel_object_handle_request get_kernel_object_handle_request;
@@ -139,7 +139,7 @@ index ba250d70abb..85f33f23044 100644
      struct make_process_system_request make_process_system_request;
      struct grant_process_admin_token_request grant_process_admin_token_request;
      struct get_token_info_request get_token_info_request;
-@@ -7070,6 +7088,7 @@ union generic_reply
+@@ -7072,6 +7090,7 @@ union generic_reply
      struct grab_kernel_object_reply grab_kernel_object_reply;
      struct release_kernel_object_reply release_kernel_object_reply;
      struct get_kernel_object_handle_reply get_kernel_object_handle_reply;
@@ -184,10 +184,10 @@ index 3eed74343e5..c7ff9f90986 100644
 +    release_object( manager );
 +}
 diff --git a/server/protocol.def b/server/protocol.def
-index f2789ec7512..ce604fed669 100644
+index 98419aabe75..e2c2ef51f5e 100644
 --- a/server/protocol.def
 +++ b/server/protocol.def
-@@ -3830,6 +3830,17 @@ struct handle_info
+@@ -3832,6 +3832,17 @@ struct handle_info
  @END
  
  
@@ -206,7 +206,7 @@ index f2789ec7512..ce604fed669 100644
  @REQ(make_process_system)
      obj_handle_t handle;          /* handle to the process */
 diff --git a/server/request_handlers.h b/server/request_handlers.h
-index 50e4374cb0e..37c1bb0f8c5 100644
+index 48f4c745f79..4bc7760f40d 100644
 --- a/server/request_handlers.h
 +++ b/server/request_handlers.h
 @@ -267,6 +267,7 @@ DECL_HANDLER(set_kernel_object_ptr);
@@ -225,7 +225,7 @@ index 50e4374cb0e..37c1bb0f8c5 100644
      (req_handler)req_make_process_system,
      (req_handler)req_grant_process_admin_token,
      (req_handler)req_get_token_info,
-@@ -2136,6 +2138,12 @@ C_ASSERT( offsetof(struct get_kernel_object_handle_request, access) == 24 );
+@@ -2138,6 +2140,12 @@ C_ASSERT( offsetof(struct get_kernel_object_handle_request, access) == 24 );
  C_ASSERT( sizeof(struct get_kernel_object_handle_request) == 32 );
  C_ASSERT( offsetof(struct get_kernel_object_handle_reply, handle) == 8 );
  C_ASSERT( sizeof(struct get_kernel_object_handle_reply) == 16 );
@@ -239,10 +239,10 @@ index 50e4374cb0e..37c1bb0f8c5 100644
  C_ASSERT( sizeof(struct make_process_system_request) == 16 );
  C_ASSERT( offsetof(struct make_process_system_reply, event) == 8 );
 diff --git a/server/request_trace.h b/server/request_trace.h
-index 043cc693376..bfd8a2044e8 100644
+index 57d7c2983f9..973bab5bc63 100644
 --- a/server/request_trace.h
 +++ b/server/request_trace.h
-@@ -3038,6 +3038,19 @@ static void dump_get_kernel_object_handle_reply( const struct get_kernel_object_
+@@ -3043,6 +3043,19 @@ static void dump_get_kernel_object_handle_reply( const struct get_kernel_object_
      fprintf( stderr, " handle=%04x", req->handle );
  }
  
@@ -262,7 +262,7 @@ index 043cc693376..bfd8a2044e8 100644
  static void dump_make_process_system_request( const struct make_process_system_request *req )
  {
      fprintf( stderr, " handle=%04x", req->handle );
-@@ -3786,6 +3799,7 @@ static const dump_func req_dumpers[REQ_NB_REQUESTS] =
+@@ -3791,6 +3804,7 @@ static const dump_func req_dumpers[REQ_NB_REQUESTS] =
      (dump_func)dump_grab_kernel_object_request,
      (dump_func)dump_release_kernel_object_request,
      (dump_func)dump_get_kernel_object_handle_request,
@@ -270,7 +270,7 @@ index 043cc693376..bfd8a2044e8 100644
      (dump_func)dump_make_process_system_request,
      (dump_func)dump_grant_process_admin_token_request,
      (dump_func)dump_get_token_info_request,
-@@ -4097,6 +4111,7 @@ static const dump_func reply_dumpers[REQ_NB_REQUESTS] =
+@@ -4102,6 +4116,7 @@ static const dump_func reply_dumpers[REQ_NB_REQUESTS] =
      NULL,
      NULL,
      (dump_func)dump_get_kernel_object_handle_reply,
@@ -278,7 +278,7 @@ index 043cc693376..bfd8a2044e8 100644
      (dump_func)dump_make_process_system_reply,
      NULL,
      (dump_func)dump_get_token_info_reply,
-@@ -4408,6 +4423,7 @@ static const char * const req_names[REQ_NB_REQUESTS] =
+@@ -4413,6 +4428,7 @@ static const char * const req_names[REQ_NB_REQUESTS] =
      "grab_kernel_object",
      "release_kernel_object",
      "get_kernel_object_handle",

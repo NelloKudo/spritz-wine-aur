@@ -1,4 +1,4 @@
-From 573acf39a87ece0f7838623f541a04f202764450 Mon Sep 17 00:00:00 2001
+From ac61f0757c4cfbcc5056c94652df782d72adcf27 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 6 Nov 2025 14:30:53 +0100
 Subject: [PATCH 12/13] HACK: kernelbase: Disable AeDebug with

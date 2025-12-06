@@ -1,4 +1,4 @@
-From 3684ba798c37545be784eee5256ef8be7660cb31 Mon Sep 17 00:00:00 2001
+From 55c65559654f8097cad9363844a1b13a43d55023 Mon Sep 17 00:00:00 2001
 From: mkrsym1 <mkrsym1@gmail.com>
 Date: Mon, 8 Sep 2025 21:05:27 +0200
 Subject: [PATCH 08/13] loader: Copy arial.ttf to fonts

@@ -1,4 +1,4 @@
-From ab6a5385a423850b496a15379572850aa75f1430 Mon Sep 17 00:00:00 2001
+From a69c823f4e17857c2eb5790973f3836393c51b34 Mon Sep 17 00:00:00 2001
 From: Derek Lesho <dlesho@codeweavers.com>
 Date: Wed, 13 Jul 2022 13:08:41 -0400
 Subject: [PATCH 37/44] ntoskrnl, server: Support referencing section objects.

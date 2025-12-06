@@ -1,4 +1,4 @@
-From 582f2e45dbaa545ee1a42064a2dd27a0202f1523 Mon Sep 17 00:00:00 2001
+From c271e28054a7865223a37f3370904e947ba3ea0e Mon Sep 17 00:00:00 2001
 From: Steven Noonan <steven@valvesoftware.com>
 Date: Wed, 17 Oct 2018 04:13:37 -0700
 Subject: [PATCH 1/8] ntdll/loader: add support for overriding
@@ -91,10 +91,10 @@ index e219d76f287..0c3f0550251 100644
 +
  #endif /* __NTDLL_UNIX_PRIVATE_H */
 diff --git a/dlls/ntdll/unix/virtual.c b/dlls/ntdll/unix/virtual.c
-index 2dbbbd74a12..ef45d0f5fdc 100644
+index 335ac9a72cb..c6b5210e052 100644
 --- a/dlls/ntdll/unix/virtual.c
 +++ b/dlls/ntdll/unix/virtual.c
-@@ -5027,6 +5027,24 @@ static void virtual_release_address_space(void)
+@@ -5028,6 +5028,24 @@ static void virtual_release_address_space(void)
  
  #endif  /* _WIN64 */
  
@@ -119,7 +119,7 @@ index 2dbbbd74a12..ef45d0f5fdc 100644
  
  /***********************************************************************
   *           virtual_set_large_address_space
-@@ -5046,11 +5064,11 @@ void virtual_set_large_address_space(void)
+@@ -5047,11 +5065,11 @@ void virtual_set_large_address_space(void)
                  free_reserved_memory( 0, (char *)0x7ffe0000 );
  #endif
          }

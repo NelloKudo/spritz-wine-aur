@@ -1,4 +1,4 @@
-From 341ec96b606ae3066d76b34e43761f76ca48b674 Mon Sep 17 00:00:00 2001
+From 0eb886bed5c1969b5f7a2764fefa0d23de355cec Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 14:56:23 +0200
 Subject: [PATCH 1/7] wbemprox: Only return linked PnP devices in

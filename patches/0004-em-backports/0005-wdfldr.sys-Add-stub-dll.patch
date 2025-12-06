@@ -1,4 +1,4 @@
-From 63b83acfe2e0c6233d8358d6649d7ae3173f2c26 Mon Sep 17 00:00:00 2001
+From 19331ea3b126d0163a837f7c29617bcc0c2461ce Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Mon, 14 Jul 2025 18:01:48 -0400
 Subject: [PATCH 05/44] wdfldr.sys: Add stub dll.
@@ -14,10 +14,10 @@ Subject: [PATCH 05/44] wdfldr.sys: Add stub dll.
  create mode 100644 dlls/wdfldr.sys/wdfldr.sys.spec
 
 diff --git a/configure.ac b/configure.ac
-index 28be9ff9a58..ab0c865ae1a 100644
+index c5c3faf4f90..e19b0c21ff4 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -3287,6 +3287,7 @@ WINE_CONFIG_MAKEFILE(dlls/wbemdisp)
+@@ -3286,6 +3286,7 @@ WINE_CONFIG_MAKEFILE(dlls/wbemdisp)
  WINE_CONFIG_MAKEFILE(dlls/wbemdisp/tests)
  WINE_CONFIG_MAKEFILE(dlls/wbemprox)
  WINE_CONFIG_MAKEFILE(dlls/wbemprox/tests)
