@@ -1,8 +1,8 @@
-From 7455ef779df8847c3996fdb0821af0781af8943e Mon Sep 17 00:00:00 2001
+From bf0b9c5372dc80d545af5b343ca96cd82b527206 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 23:32:46 -0400
-Subject: [PATCH 23/44] ntoskrnl: Implement SeLocateProcessImageName.
+Subject: [PATCH 11/18] ntoskrnl: Implement SeLocateProcessImageName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 51 ++++++++++++++++++++++++----
@@ -10,10 +10,10 @@ Subject: [PATCH 23/44] ntoskrnl: Implement SeLocateProcessImageName.
  2 files changed, 47 insertions(+), 7 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index d54b06a89b2..17da14f9a3d 100644
+index c886752fb9e..96efa79e154 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2453,9 +2453,10 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
+@@ -2464,9 +2464,10 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
  
  static void *create_process_object( HANDLE handle )
  {
@@ -25,7 +25,7 @@ index d54b06a89b2..17da14f9a3d 100644
  
      if (!(process = alloc_kernel_object( PsProcessType, handle, sizeof(*process), 0 ))) return NULL;
  
-@@ -2465,24 +2466,52 @@ static void *create_process_object( HANDLE handle )
+@@ -2476,24 +2477,52 @@ static void *create_process_object( HANDLE handle )
      NtQueryInformationProcess( handle, ProcessSessionInformation, &process->session_id, sizeof(process->session_id), NULL );
      NtQueryInformationProcess( handle, ProcessTimes, &process->times, sizeof(process->times), NULL );
  
@@ -80,7 +80,7 @@ index d54b06a89b2..17da14f9a3d 100644
  };
  
  POBJECT_TYPE PsProcessType = &process_type;
-@@ -4461,9 +4490,19 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
+@@ -4384,9 +4413,19 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
   */
  NTSTATUS WINAPI SeLocateProcessImageName(PEPROCESS process, UNICODE_STRING **image_name)
  {
@@ -104,7 +104,7 @@ index d54b06a89b2..17da14f9a3d 100644
  
  /*********************************************************************
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index fc1a9283633..f0c0f82aeaa 100644
+index c7bcce2c7e3..f75ff74d55c 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
 @@ -57,7 +57,8 @@ struct _EPROCESS

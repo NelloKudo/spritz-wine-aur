@@ -1,8 +1,8 @@
-From 767db6477481286f94e78a3ce5cd88685f352bb2 Mon Sep 17 00:00:00 2001
+From 05b988ba9db50e6b83e128e2e2eb2a6fe66123eb Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:39:47 -0400
-Subject: [PATCH 29/44] fixup! ntoskrnl: SeLocateProcessImageName.
+Subject: [PATCH 15/18] fixup! ntoskrnl: SeLocateProcessImageName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 72 +++++++++++++++++++++-------
@@ -11,10 +11,10 @@ Subject: [PATCH 29/44] fixup! ntoskrnl: SeLocateProcessImageName.
  3 files changed, 62 insertions(+), 21 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 80f7e2d5f39..da4d4e3aa04 100644
+index a0af8a6eef0..d5021a7e3c2 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2458,7 +2458,7 @@ static void *create_process_object( HANDLE handle )
+@@ -2469,7 +2469,7 @@ static void *create_process_object( HANDLE handle )
      HANDLE token;
      PEPROCESS process;
      ANSI_STRING fullImageNameA;
@@ -23,7 +23,7 @@ index 80f7e2d5f39..da4d4e3aa04 100644
  
      if (!(process = alloc_kernel_object( PsProcessType, handle, sizeof(*process), 0 ))) return NULL;
  
-@@ -2469,15 +2469,12 @@ static void *create_process_object( HANDLE handle )
+@@ -2480,15 +2480,12 @@ static void *create_process_object( HANDLE handle )
      NtQueryInformationProcess( handle, ProcessTimes, &process->times, sizeof(process->times), NULL );
  
      /* get full image name */
@@ -45,7 +45,7 @@ index 80f7e2d5f39..da4d4e3aa04 100644
      if (!fullImageNameA.Buffer) return NULL;
      /* generate short name */
      for (p = fullImageNameA.Buffer + fullImageNameA.Length - 1; p >= fullImageNameA.Buffer; p--)
-@@ -2490,6 +2487,7 @@ static void *create_process_object( HANDLE handle )
+@@ -2501,6 +2498,7 @@ static void *create_process_object( HANDLE handle )
      }
      memcpy(process->imageName, p, min(fullImageNameA.Buffer + fullImageNameA.Length - p, sizeof(process->imageName)));
      RtlFreeAnsiString(&fullImageNameA);
@@ -53,7 +53,7 @@ index 80f7e2d5f39..da4d4e3aa04 100644
  
      IsWow64Process( handle, &process->wow64 );
  
-@@ -2503,8 +2501,11 @@ static void *create_process_object( HANDLE handle )
+@@ -2514,8 +2512,11 @@ static void *create_process_object( HANDLE handle )
  void release_process_object(void *obj)
  {
      PEPROCESS process = obj;
@@ -67,7 +67,7 @@ index 80f7e2d5f39..da4d4e3aa04 100644
  
      SERVER_START_REQ( release_kernel_object )
      {
-@@ -2763,11 +2764,10 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
+@@ -2738,11 +2739,10 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
   */
  NTSTATUS WINAPI PsGetContextThread(PETHREAD thread, CONTEXT *context)
  {
@@ -81,7 +81,7 @@ index 80f7e2d5f39..da4d4e3aa04 100644
          return STATUS_NOT_FOUND;
  
      status = NtGetContextThread(handle, context);
-@@ -3116,6 +3116,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
+@@ -3091,6 +3091,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
      return ret;
  }
  
@@ -100,7 +100,7 @@ index 80f7e2d5f39..da4d4e3aa04 100644
  /***********************************************************************
   *           MmGetVirtualForPhysical   (NTOSKRNL.EXE.@)
   */
-@@ -4527,18 +4539,42 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
+@@ -4450,18 +4462,42 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
   */
  NTSTATUS WINAPI SeLocateProcessImageName(PEPROCESS process, UNICODE_STRING **image_name)
  {
@@ -115,21 +115,21 @@ index 80f7e2d5f39..da4d4e3aa04 100644
 -    *image_name = ExAllocatePool(PagedPool, sizeof(UNICODE_STRING));
 +    if (!(handle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, HandleToUlong(id))))
 +        return STATUS_NOT_FOUND;
-+
+ 
+-    if (!*image_name) return STATUS_NO_MEMORY;
 +    NtQueryInformationProcess(handle, ProcessImageFileNameWin32, *image_name, 0, &len);
-+
+ 
+-    **image_name = process->fullImageName;
 +    len += sizeof(WCHAR);
 +
 +    *image_name = ExAllocatePool(PagedPool, len);
- 
--    if (!*image_name) return STATUS_NO_MEMORY;
++
 +    if (!*image_name)
 +    {
 +        NtClose(handle);
 +        return STATUS_NO_MEMORY;
 +    }
- 
--    **image_name = process->fullImageName;
++
 +    (*image_name)->MaximumLength = len;
 +
 +    if ((status = NtQueryInformationProcess(handle, ProcessImageFileNameWin32,
@@ -147,10 +147,10 @@ index 80f7e2d5f39..da4d4e3aa04 100644
  }
  
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 5379e389856..c380162136d 100644
+index 9df5642878d..f7e25ddf868 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -727,7 +727,7 @@
+@@ -725,7 +725,7 @@
  @ stdcall MmFreeNonCachedMemory(ptr long)
  @ stub MmFreePagesFromMdl
  @ stdcall MmGetPhysicalAddress(ptr)
@@ -160,7 +160,7 @@ index 5379e389856..c380162136d 100644
  @ stdcall MmGetVirtualForPhysical(int64)
  @ stub MmGrowKernelStack
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index 471a867fc35..1b8625f91b4 100644
+index 10aebe722de..14d5a3a4e29 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
 @@ -56,9 +56,8 @@ struct _EPROCESS

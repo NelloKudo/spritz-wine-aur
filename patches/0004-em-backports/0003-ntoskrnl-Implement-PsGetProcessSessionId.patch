@@ -1,8 +1,8 @@
-From 8ac1f9b0c161342c7fa9e684aa991a051526ba60 Mon Sep 17 00:00:00 2001
+From 45b00980f3e5b5ad08290ee7eb3b6d95d89c8a51 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 15:51:31 -0400
-Subject: [PATCH 10/44] ntoskrnl: Implement PsGetProcessSessionId.
+Subject: [PATCH 03/18] ntoskrnl: Implement PsGetProcessSessionId.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 11 +++++++++++
@@ -11,10 +11,10 @@ Subject: [PATCH 10/44] ntoskrnl: Implement PsGetProcessSessionId.
  3 files changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 0a583639672..0adf01f8c84 100644
+index ffff9e23887..f6d6a53db29 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2460,7 +2460,9 @@ static void *create_process_object( HANDLE handle )
+@@ -2471,7 +2471,9 @@ static void *create_process_object( HANDLE handle )
      process->header.Type = 3;
      process->header.WaitListHead.Blink = INVALID_HANDLE_VALUE; /* mark as kernel object */
      NtQueryInformationProcess( handle, ProcessBasicInformation, &process->info, sizeof(process->info), NULL );
@@ -24,7 +24,7 @@ index 0a583639672..0adf01f8c84 100644
      return process;
  }
  
-@@ -2530,6 +2532,15 @@ HANDLE WINAPI PsGetProcessInheritedFromUniqueProcessId( PEPROCESS process )
+@@ -2532,6 +2534,15 @@ HANDLE WINAPI PsGetProcessInheritedFromUniqueProcessId( PEPROCESS process )
      return id;
  }
  
@@ -41,10 +41,10 @@ index 0a583639672..0adf01f8c84 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 080221c268b..606895cc474 100644
+index 1c2449d9f4d..d810dcb91b2 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -934,7 +934,7 @@
+@@ -931,7 +931,7 @@
  @ stub PsGetProcessPriorityClass
  @ stdcall PsGetProcessSectionBaseAddress(ptr)
  @ stub PsGetProcessSecurityPort
@@ -54,7 +54,7 @@ index 080221c268b..606895cc474 100644
  @ stub PsGetProcessWin32WindowStation
  @ stdcall -arch=x86_64 PsGetProcessWow64Process(ptr)
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index 7e0f3cf1f25..fb596355b9a 100644
+index ad53ee181a5..4b0957f7d2f 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
 @@ -55,6 +55,7 @@ struct _EPROCESS
