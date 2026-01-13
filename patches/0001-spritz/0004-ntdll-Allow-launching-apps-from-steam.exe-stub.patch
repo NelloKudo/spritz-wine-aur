@@ -1,7 +1,7 @@
-From f404924371c6c5b1118cc23cda37f350ed9bbf83 Mon Sep 17 00:00:00 2001
+From d7e073c4b4631134b33933e5bc62811dbe52e759 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 25 Aug 2025 23:25:25 +0200
-Subject: [PATCH 04/13] ntdll: Allow launching apps from steam.exe stub
+Subject: [PATCH 04/11] ntdll: Allow launching apps from steam.exe stub
 
 Some games need to be launched from Proton's stub steam.exe to allow
 being launched on Linux and related systems: this allows doing so without
@@ -13,10 +13,10 @@ any Proton script, but straight up from Wine.
  3 files changed, 68 insertions(+), 8 deletions(-)
 
 diff --git a/dlls/ntdll/unix/env.c b/dlls/ntdll/unix/env.c
-index 4262d384c31..4a3f4fa9cb2 100644
+index 0fb7c59e9d9..aac7a32a904 100644
 --- a/dlls/ntdll/unix/env.c
 +++ b/dlls/ntdll/unix/env.c
-@@ -1880,6 +1880,24 @@ static void init_peb( RTL_USER_PROCESS_PARAMETERS *params, void *module )
+@@ -1874,6 +1874,24 @@ static void init_peb( RTL_USER_PROCESS_PARAMETERS *params, void *module )
  }
  
  
@@ -41,7 +41,7 @@ index 4262d384c31..4a3f4fa9cb2 100644
  /*************************************************************************
   *		build_initial_params
   *
-@@ -1896,6 +1914,7 @@ static RTL_USER_PROCESS_PARAMETERS *build_initial_params( void **module )
+@@ -1890,6 +1908,7 @@ static RTL_USER_PROCESS_PARAMETERS *build_initial_params( void **module )
      WCHAR *curdir = get_initial_directory();
      UNICODE_STRING nt_name;
      NTSTATUS status;
@@ -49,7 +49,7 @@ index 4262d384c31..4a3f4fa9cb2 100644
  
      if (NtCurrentTeb64()) NtCurrentTeb64()->TlsSlots[WOW64_TLS_FILESYSREDIR] = TRUE;
  
-@@ -1941,18 +1960,31 @@ static RTL_USER_PROCESS_PARAMETERS *build_initial_params( void **module )
+@@ -1935,18 +1954,31 @@ static RTL_USER_PROCESS_PARAMETERS *build_initial_params( void **module )
          }
      }
  

@@ -1,7 +1,7 @@
-From 47af47feb422034bde8a13415bd3892e06c6f1ed Mon Sep 17 00:00:00 2001
+From a4259640f222e446842b02c20088a8b45beb4692 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Sat, 12 Jul 2025 14:38:28 +0200
-Subject: [PATCH 07/13] HACK: winex11: make WM focus the window by default
+Subject: [PATCH 07/11] HACK: winex11: make WM focus the window by default
 
 From a patch first included in Proton 8, fixes issues with Unity games losing inputs after alt-tab.
 ---

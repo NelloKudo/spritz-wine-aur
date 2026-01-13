@@ -1,4 +1,4 @@
-From d672152962c91f6f019d6d2a45abc261780a2fe0 Mon Sep 17 00:00:00 2001
+From 6fd728377af07c0200b0a6b25c51ec412c137d54 Mon Sep 17 00:00:00 2001
 From: Joshua Ashton <joshua@froggi.es>
 Date: Thu, 16 Jul 2020 09:34:57 +0100
 Subject: [PATCH 3/8] user32: Update system colors

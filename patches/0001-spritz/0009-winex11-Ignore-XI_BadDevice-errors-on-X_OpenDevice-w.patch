@@ -1,7 +1,7 @@
-From 885fb54db2fdc9bf20b1343581672e4cdabafc62 Mon Sep 17 00:00:00 2001
+From 0da29e93157ea0c5c22b6733fb7fa9c5ddc62383 Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Sat, 8 Feb 2025 21:45:00 -0800
-Subject: [PATCH 09/13] winex11: Ignore XI_BadDevice errors on X_OpenDevice
+Subject: [PATCH 09/11] winex11: Ignore XI_BadDevice errors on X_OpenDevice
  when hotplugging devices.
 
 ---

@@ -1,7 +1,7 @@
-From 37df3f6ae06028599320787276a7f6541b5b6508 Mon Sep 17 00:00:00 2001
+From 6c8ca5a7321407e2e311f059b6a59624a2c49ef0 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Wed, 10 Sep 2025 01:12:08 +0200
-Subject: [PATCH 01/13] winediag: change logging and redirect to Spritz
+Subject: [PATCH 01/11] winediag: change logging and redirect to Spritz
  repository
 
 ---

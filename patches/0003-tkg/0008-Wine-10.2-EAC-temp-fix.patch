@@ -1,4 +1,4 @@
-From aa96dc4d1270573ab5efb9c3a39bf36e85cb312b Mon Sep 17 00:00:00 2001
+From e1c84a0a009efaa1228d9ba03b1f4a998d84f940 Mon Sep 17 00:00:00 2001
 From: Vingian <89702391+Vingian@users.noreply.github.com>
 Date: Mon, 24 Feb 2025 15:07:47 -0300
 Subject: [PATCH 8/8] Wine 10.2+ EAC temp fix.
@@ -12,7 +12,7 @@ This is just a temporary fix until EAC gets updated.
  3 files changed, 32 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 79753409fca..c5c3faf4f90 100644
+index 43f5c3651e0..0555424ea5b 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -2087,7 +2087,13 @@ fi
@@ -41,7 +41,7 @@ index 79753409fca..c5c3faf4f90 100644
  fi
  
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index 1be9ab4eee1..15c8e6fec39 100644
+index 0ca48c68e0c..aacff53d15e 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
 @@ -455,7 +455,11 @@ static void init_paths(void)

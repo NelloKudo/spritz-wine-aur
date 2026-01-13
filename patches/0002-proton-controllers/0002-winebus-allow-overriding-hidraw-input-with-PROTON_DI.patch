@@ -1,4 +1,4 @@
-From ec42edb6de177a583ea1d62500104b4b8d9806e1 Mon Sep 17 00:00:00 2001
+From 105f420a9f0b13626ca32f2f61646953df0f3bb4 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 15:44:20 +0200
 Subject: [PATCH 2/7] winebus: allow overriding hidraw/input with

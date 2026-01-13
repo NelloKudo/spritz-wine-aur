@@ -1,4 +1,4 @@
-From 42d398169460a65c150f6823a42d870487b24724 Mon Sep 17 00:00:00 2001
+From e9356576073fcbd50aa72f0cd58c95565ffd4558 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Thu, 27 Jul 2023 09:23:11 +0200
 Subject: [PATCH 7/7] Revert "ntoskrnl: Enumerate child devices on a separate

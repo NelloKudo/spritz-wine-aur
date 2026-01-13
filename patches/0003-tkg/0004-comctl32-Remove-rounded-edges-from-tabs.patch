@@ -1,4 +1,4 @@
-From 8242e67c4be09646831b79727eb6d3820bd841a8 Mon Sep 17 00:00:00 2001
+From 6f91585181ddfdf1f089d01784f2b5111c633485 Mon Sep 17 00:00:00 2001
 From: Joshua Ashton <joshua@froggi.es>
 Date: Thu, 16 Jul 2020 10:18:14 +0100
 Subject: [PATCH 4/8] comctl32: Remove rounded edges from tabs
@@ -9,7 +9,7 @@ Signed-off-by: Joshua Ashton <joshua@froggi.es>
  1 file changed, 16 insertions(+), 33 deletions(-)
 
 diff --git a/dlls/comctl32/tab.c b/dlls/comctl32/tab.c
-index a83d6a5277d..2e179a04799 100644
+index 3a964c41608..35611bca59e 100644
 --- a/dlls/comctl32/tab.c
 +++ b/dlls/comctl32/tab.c
 @@ -128,7 +128,6 @@ typedef struct

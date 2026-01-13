@@ -1,8 +1,8 @@
-From 75d72c9dcf6bdc2ff14a3fd37af49ada50a962f7 Mon Sep 17 00:00:00 2001
+From 9a23955c394b7ab73dc20a03a18491b72a22e05c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 22:11:36 -0400
-Subject: [PATCH 10/18] ntoskrnl: Implement PsGetProcessImageFileName.
+Subject: [PATCH 10/17] ntoskrnl: Implement PsGetProcessImageFileName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 19 +++++++++++++++++++
@@ -11,10 +11,10 @@ Subject: [PATCH 10/18] ntoskrnl: Implement PsGetProcessImageFileName.
  3 files changed, 21 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 0f67edd8f41..c886752fb9e 100644
+index 687f7800a4c..7079fac5a62 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2465,6 +2465,8 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
+@@ -2454,6 +2454,8 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
  static void *create_process_object( HANDLE handle )
  {
      PEPROCESS process;
@@ -23,7 +23,7 @@ index 0f67edd8f41..c886752fb9e 100644
  
      if (!(process = alloc_kernel_object( PsProcessType, handle, sizeof(*process), 0 ))) return NULL;
  
-@@ -2473,6 +2475,14 @@ static void *create_process_object( HANDLE handle )
+@@ -2462,6 +2464,14 @@ static void *create_process_object( HANDLE handle )
      NtQueryInformationProcess( handle, ProcessBasicInformation, &process->info, sizeof(process->info), NULL );
      NtQueryInformationProcess( handle, ProcessSessionInformation, &process->session_id, sizeof(process->session_id), NULL );
      NtQueryInformationProcess( handle, ProcessTimes, &process->times, sizeof(process->times), NULL );
@@ -38,7 +38,7 @@ index 0f67edd8f41..c886752fb9e 100644
      IsWow64Process( handle, &process->wow64 );
  
      return process;
-@@ -2553,6 +2563,15 @@ LONGLONG WINAPI PsGetProcessCreateTimeQuadPart( PEPROCESS process )
+@@ -2542,6 +2552,15 @@ LONGLONG WINAPI PsGetProcessCreateTimeQuadPart( PEPROCESS process )
      return process->times.CreateTime.QuadPart;
  }
  
@@ -55,10 +55,10 @@ index 0f67edd8f41..c886752fb9e 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index e9a99513e11..ca2f255f056 100644
+index 1b86a8d4e9c..af0603e4d9a 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -924,7 +924,7 @@
+@@ -927,7 +927,7 @@
  @ stub PsGetProcessExitStatus
  @ stub PsGetProcessExitTime
  @ stdcall PsGetProcessId(ptr)
@@ -68,7 +68,7 @@ index e9a99513e11..ca2f255f056 100644
  @ stub PsGetProcessJob
  @ stub PsGetProcessPeb
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index a1f07a75dcd..c7bcce2c7e3 100644
+index b7702f0b6e6..fc1a9283633 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
 @@ -57,6 +57,7 @@ struct _EPROCESS

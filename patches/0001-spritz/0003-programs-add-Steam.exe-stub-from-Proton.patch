@@ -1,7 +1,7 @@
-From 9b8400aced5c3976e4a8916363efe4d22e2a9aef Mon Sep 17 00:00:00 2001
+From ad5c53e3c10241e133010151500b693704b96087 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 25 Aug 2025 20:39:20 +0200
-Subject: [PATCH 03/13] programs: add Steam.exe stub from Proton
+Subject: [PATCH 03/11] programs: add Steam.exe stub from Proton
 
 Attempt at including the steam.exe stub from Valve's Proton to Wine,
 source for the file: https://github.com/ValveSoftware/Proton/tree/1e52f95633c5145aaf54bc27476021d9e1baade2/steam_helper
@@ -14,10 +14,10 @@ source for the file: https://github.com/ValveSoftware/Proton/tree/1e52f95633c514
  create mode 100644 programs/steam/steam.c
 
 diff --git a/configure.ac b/configure.ac
-index c3d7b18541f..79753409fca 100644
+index 802bb29ddfa..43f5c3651e0 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -3618,6 +3618,7 @@ WINE_CONFIG_MAKEFILE(programs/shutdown)
+@@ -3619,6 +3619,7 @@ WINE_CONFIG_MAKEFILE(programs/shutdown)
  WINE_CONFIG_MAKEFILE(programs/sort)
  WINE_CONFIG_MAKEFILE(programs/spoolsv)
  WINE_CONFIG_MAKEFILE(programs/start)

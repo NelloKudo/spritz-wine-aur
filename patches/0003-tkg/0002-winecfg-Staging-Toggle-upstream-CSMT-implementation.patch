@@ -1,4 +1,4 @@
-From 776525022907b1b4f8191189849c40a16bb50e33 Mon Sep 17 00:00:00 2001
+From 09b2e61f9c2ca9049c8d221dd3c54bc305ad71e6 Mon Sep 17 00:00:00 2001
 From: Firerat <firer4t@googlemail.com>
 Date: Sat, 7 Apr 2018 01:05:29 +0100
 Subject: [PATCH 2/8] winecfg-Staging: Toggle upstream CSMT implementation

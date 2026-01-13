@@ -1,7 +1,7 @@
-From e3fa3d6017a57f68a668e816a6ee53202338bf62 Mon Sep 17 00:00:00 2001
+From 25452405e517a063414adfe4e61af4619b5a5740 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 14 Dec 2022 21:21:50 +0100
-Subject: [PATCH 10/13] HACK: winex11.drv: Workaround focusing out of exclusive
+Subject: [PATCH 10/11] HACK: winex11.drv: Workaround focusing out of exclusive
  fullscreen windows.
 
 This retargets some old window manager workarounds which don't seem to
@@ -28,7 +28,7 @@ Original commits were:
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/winex11.drv/window.c b/dlls/winex11.drv/window.c
-index 70977cdf651..0b855f97c30 100644
+index 846a04126a2..528f4a4aecf 100644
 --- a/dlls/winex11.drv/window.c
 +++ b/dlls/winex11.drv/window.c
 @@ -1498,7 +1498,15 @@ static void update_net_wm_states( struct x11drv_win_data *data )

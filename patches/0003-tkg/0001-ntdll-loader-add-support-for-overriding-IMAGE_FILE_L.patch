@@ -1,4 +1,4 @@
-From c271e28054a7865223a37f3370904e947ba3ea0e Mon Sep 17 00:00:00 2001
+From eea6186bfa541f954ebd4c84281eb83c1f39ae53 Mon Sep 17 00:00:00 2001
 From: Steven Noonan <steven@valvesoftware.com>
 Date: Wed, 17 Oct 2018 04:13:37 -0700
 Subject: [PATCH 1/8] ntdll/loader: add support for overriding
