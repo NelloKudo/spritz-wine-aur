@@ -1,7 +1,7 @@
-From 93a58e23635e168da1f06cc56c09691bf21b199f Mon Sep 17 00:00:00 2001
+From 587074e73d79f7b4bfd85510f0acc917ab0d57c8 Mon Sep 17 00:00:00 2001
 From: mkrsym1 <mkrsym1@gmail.com>
 Date: Mon, 8 Sep 2025 21:05:27 +0200
-Subject: [PATCH 08/11] loader: Copy arial.ttf to fonts
+Subject: [PATCH 07/10] loader: Copy arial.ttf to fonts
 
 ---
  loader/wine.inf.in | 9 +++++++--

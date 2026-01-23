@@ -1,7 +1,7 @@
-From 7fcacc690ebaa57f49c3d17c54fd7ae3b3ff6919 Mon Sep 17 00:00:00 2001
+From 90ad4bffe9ef629dd806730d7c9c31494b453661 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 18 Sep 2025 11:50:52 +0200
-Subject: [PATCH 05/11] ntdll: set WINE_ENABLE_STEAM_STUB for GI
+Subject: [PATCH 05/10] ntdll: set WINE_ENABLE_STEAM_STUB for GI
 
 Based on Proton's hacks_init() function.
 ---
@@ -9,10 +9,10 @@ Based on Proton's hacks_init() function.
  1 file changed, 13 insertions(+)
 
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index b805006f94d..0ca48c68e0c 100644
+index 6086db6207d..208d61ea5d3 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
-@@ -1929,6 +1929,18 @@ static ULONG_PTR get_image_address(void)
+@@ -1806,6 +1806,18 @@ static ULONG_PTR get_image_address(void)
      return 0;
  }
  
@@ -31,7 +31,7 @@ index b805006f94d..0ca48c68e0c 100644
  /***********************************************************************
   *           start_main_thread
   */
-@@ -1939,6 +1951,7 @@ static void start_main_thread(void)
+@@ -1816,6 +1828,7 @@ static void start_main_thread(void)
      signal_init_threading();
      dbg_init();
      startup_info_size = server_init_process();

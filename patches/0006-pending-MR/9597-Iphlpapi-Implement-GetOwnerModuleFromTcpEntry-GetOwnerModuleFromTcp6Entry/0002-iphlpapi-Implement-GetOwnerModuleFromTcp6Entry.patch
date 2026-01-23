@@ -1,4 +1,4 @@
-From 38cc44d4c7cd04d6121932a3cbfe80b68f4ae143 Mon Sep 17 00:00:00 2001
+From 006cb30bd355d3346e82a8a4d3971ca8bbe0fde3 Mon Sep 17 00:00:00 2001
 From: Paul Gofman <pgofman@codeweavers.com>
 Date: Tue, 25 Nov 2025 20:08:03 -0600
 Subject: [PATCH 2/2] iphlpapi: Implement GetOwnerModuleFromTcp6Entry().

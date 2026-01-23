@@ -1,4 +1,4 @@
-From eea6186bfa541f954ebd4c84281eb83c1f39ae53 Mon Sep 17 00:00:00 2001
+From f3decb88c05bb4f9441c4551a7d0d41725538a99 Mon Sep 17 00:00:00 2001
 From: Steven Noonan <steven@valvesoftware.com>
 Date: Wed, 17 Oct 2018 04:13:37 -0700
 Subject: [PATCH 1/8] ntdll/loader: add support for overriding
@@ -54,7 +54,7 @@ index 834f4d07e9b..4d27b38ddca 100644
          if (lpBuffer->dwTotalPhys > MAXLONG) lpBuffer->dwTotalPhys = MAXLONG;
          if (lpBuffer->dwAvailPhys > MAXLONG) lpBuffer->dwAvailPhys = MAXLONG;
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index 46cd1dccab5..ec5ffa496ba 100644
+index fc9a13c49ef..0f837a7029f 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -1761,6 +1761,9 @@
@@ -80,10 +80,10 @@ index 97ad7050843..7b4923aa94c 100644
  DEFINE_SYSCALL(NtAccessCheck, (PSECURITY_DESCRIPTOR descr, HANDLE token, ACCESS_MASK access, GENERIC_MAPPING *mapping, PRIVILEGE_SET *privs, ULONG *retlen, ULONG *access_granted, NTSTATUS *access_status))
  DEFINE_SYSCALL(NtAccessCheckAndAuditAlarm, (UNICODE_STRING *subsystem, HANDLE handle, UNICODE_STRING *typename, UNICODE_STRING *objectname, PSECURITY_DESCRIPTOR descr, ACCESS_MASK access, GENERIC_MAPPING *mapping, BOOLEAN creation, ACCESS_MASK *access_granted, NTSTATUS *access_status, BOOLEAN *onclose))
 diff --git a/dlls/ntdll/unix/unix_private.h b/dlls/ntdll/unix/unix_private.h
-index e219d76f287..0c3f0550251 100644
+index 5a845b25fbb..9d062f3f421 100644
 --- a/dlls/ntdll/unix/unix_private.h
 +++ b/dlls/ntdll/unix/unix_private.h
-@@ -692,4 +692,6 @@ static inline int is_gdt_sel( WORD sel )
+@@ -693,4 +693,6 @@ static inline int is_gdt_sel( WORD sel )
  
  #endif  /* defined(__i386__) || defined(__x86_64__) */
  

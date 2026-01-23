@@ -1,7 +1,7 @@
-From d7e073c4b4631134b33933e5bc62811dbe52e759 Mon Sep 17 00:00:00 2001
+From 2241813341e7a0fcb1ade6758b7e9293881355e8 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 25 Aug 2025 23:25:25 +0200
-Subject: [PATCH 04/11] ntdll: Allow launching apps from steam.exe stub
+Subject: [PATCH 04/10] ntdll: Allow launching apps from steam.exe stub
 
 Some games need to be launched from Proton's stub steam.exe to allow
 being launched on Linux and related systems: this allows doing so without
@@ -90,10 +90,10 @@ index 0fb7c59e9d9..aac7a32a904 100644
  
      main_wargv = build_wargv( get_dos_path( nt_name.Buffer ));
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index cb700dd80e8..b805006f94d 100644
+index c9696fef115..6086db6207d 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
-@@ -1553,6 +1553,33 @@ NTSTATUS load_start_exe( UNICODE_STRING *nt_name, void **module )
+@@ -1430,6 +1430,33 @@ NTSTATUS load_start_exe( UNICODE_STRING *nt_name, void **module )
      return status;
  }
  
@@ -128,10 +128,10 @@ index cb700dd80e8..b805006f94d 100644
  {
      const DWORD *functions = (const DWORD *)((BYTE *)module + exports->AddressOfFunctions);
 diff --git a/dlls/ntdll/unix/unix_private.h b/dlls/ntdll/unix/unix_private.h
-index fab50e3a218..e219d76f287 100644
+index e9304c0d843..5a845b25fbb 100644
 --- a/dlls/ntdll/unix/unix_private.h
 +++ b/dlls/ntdll/unix/unix_private.h
-@@ -218,6 +218,7 @@ extern NTSTATUS load_builtin( const struct pe_image_info *image_info, UNICODE_ST
+@@ -219,6 +219,7 @@ extern NTSTATUS load_builtin( const struct pe_image_info *image_info, UNICODE_ST
  extern BOOL is_builtin_path( const UNICODE_STRING *path, WORD *machine );
  extern NTSTATUS load_main_exe( UNICODE_STRING *nt_name, USHORT load_machine, void **module );
  extern NTSTATUS load_start_exe( UNICODE_STRING *nt_name, void **module );
