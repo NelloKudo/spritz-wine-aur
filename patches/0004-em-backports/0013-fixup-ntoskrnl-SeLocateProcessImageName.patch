@@ -1,8 +1,8 @@
-From 9befe7a3f01829ccfb016fbd58e9bbb19015e7ed Mon Sep 17 00:00:00 2001
+From 1f32b44af49b264410ac7210ac5952eee91395da Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:39:47 -0400
-Subject: [PATCH 15/17] fixup! ntoskrnl: SeLocateProcessImageName.
+Subject: [PATCH 13/15] fixup! ntoskrnl: SeLocateProcessImageName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 72 +++++++++++++++++++++-------
@@ -11,10 +11,10 @@ Subject: [PATCH 15/17] fixup! ntoskrnl: SeLocateProcessImageName.
  3 files changed, 62 insertions(+), 21 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index cf7b35d356d..23369ab2a7f 100644
+index c2d5a64dd42..44d9c9c353f 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2458,7 +2458,7 @@ static void *create_process_object( HANDLE handle )
+@@ -2488,7 +2488,7 @@ static void *create_process_object( HANDLE handle )
      HANDLE token;
      PEPROCESS process;
      ANSI_STRING fullImageNameA;
@@ -23,7 +23,7 @@ index cf7b35d356d..23369ab2a7f 100644
  
      if (!(process = alloc_kernel_object( PsProcessType, handle, sizeof(*process), 0 ))) return NULL;
  
-@@ -2469,15 +2469,12 @@ static void *create_process_object( HANDLE handle )
+@@ -2499,15 +2499,12 @@ static void *create_process_object( HANDLE handle )
      NtQueryInformationProcess( handle, ProcessTimes, &process->times, sizeof(process->times), NULL );
  
      /* get full image name */
@@ -45,7 +45,7 @@ index cf7b35d356d..23369ab2a7f 100644
      if (!fullImageNameA.Buffer) return NULL;
      /* generate short name */
      for (p = fullImageNameA.Buffer + fullImageNameA.Length - 1; p >= fullImageNameA.Buffer; p--)
-@@ -2490,6 +2487,7 @@ static void *create_process_object( HANDLE handle )
+@@ -2520,6 +2517,7 @@ static void *create_process_object( HANDLE handle )
      }
      memcpy(process->imageName, p, min(fullImageNameA.Buffer + fullImageNameA.Length - p, sizeof(process->imageName)));
      RtlFreeAnsiString(&fullImageNameA);
@@ -53,7 +53,7 @@ index cf7b35d356d..23369ab2a7f 100644
  
      IsWow64Process( handle, &process->wow64 );
  
-@@ -2503,8 +2501,11 @@ static void *create_process_object( HANDLE handle )
+@@ -2533,8 +2531,11 @@ static void *create_process_object( HANDLE handle )
  void release_process_object(void *obj)
  {
      PEPROCESS process = obj;
@@ -67,7 +67,7 @@ index cf7b35d356d..23369ab2a7f 100644
  
      SERVER_START_REQ( release_kernel_object )
      {
-@@ -2727,11 +2728,10 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
+@@ -2757,11 +2758,10 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
   */
  NTSTATUS WINAPI PsGetContextThread(PETHREAD thread, CONTEXT *context)
  {
@@ -81,7 +81,7 @@ index cf7b35d356d..23369ab2a7f 100644
          return STATUS_NOT_FOUND;
  
      status = NtGetContextThread(handle, context);
-@@ -3080,6 +3080,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
+@@ -3110,6 +3110,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
      return ret;
  }
  
@@ -100,7 +100,7 @@ index cf7b35d356d..23369ab2a7f 100644
  /***********************************************************************
   *           MmGetVirtualForPhysical   (NTOSKRNL.EXE.@)
   */
-@@ -4451,18 +4463,42 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
+@@ -4481,18 +4493,42 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
   */
  NTSTATUS WINAPI SeLocateProcessImageName(PEPROCESS process, UNICODE_STRING **image_name)
  {
@@ -147,7 +147,7 @@ index cf7b35d356d..23369ab2a7f 100644
  }
  
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index ea08221682f..bea7d389839 100644
+index e8dc2848ffe..b304fd87415 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -727,7 +727,7 @@
@@ -160,10 +160,10 @@ index ea08221682f..bea7d389839 100644
  @ stdcall MmGetVirtualForPhysical(int64)
  @ stub MmGrowKernelStack
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index 471a867fc35..1b8625f91b4 100644
+index 77f2c42d622..57ce7991a68 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-@@ -56,9 +56,8 @@ struct _EPROCESS
+@@ -57,9 +57,8 @@ struct _EPROCESS
      PROCESS_BASIC_INFORMATION info;
      KERNEL_USER_TIMES times;
      BOOL wow64;
@@ -174,7 +174,7 @@ index 471a867fc35..1b8625f91b4 100644
      char imageName[15];
  };
  
-@@ -76,6 +75,12 @@ struct _ETHREAD
+@@ -77,6 +76,12 @@ struct _ETHREAD
      struct _KTHREAD kthread;
  };
  
@@ -188,5 +188,5 @@ index 471a867fc35..1b8625f91b4 100644
  NTSTATUS kernel_object_from_handle( HANDLE handle, POBJECT_TYPE type, void **ret );
  
 -- 
-2.52.0
+2.53.0
 

@@ -1,12 +1,12 @@
-From db5ee609eac573b224447c80726e597553983c5b Mon Sep 17 00:00:00 2001
+From c3604b70154615c48de7807a82012be464f7454a Mon Sep 17 00:00:00 2001
 From: winebuild <wine@build.dev>
 Date: Sat, 24 Jan 2026 23:21:02 +0300
 Subject: [PATCH] revert: winewayland: Support wl_seat version 8.
 
 ---
  dlls/winewayland.drv/wayland.c         |  2 +-
- dlls/winewayland.drv/wayland_pointer.c | 19 ++++++-------------
- 2 files changed, 7 insertions(+), 14 deletions(-)
+ dlls/winewayland.drv/wayland_pointer.c | 19 +++++--------------
+ 2 files changed, 6 insertions(+), 15 deletions(-)
 
 diff --git a/dlls/winewayland.drv/wayland.c b/dlls/winewayland.drv/wayland.c
 index b164210adf0..acc340d98c7 100644
@@ -22,7 +22,7 @@ index b164210adf0..acc340d98c7 100644
          wl_seat_add_listener(seat->wl_seat, &seat_listener, NULL);
          pthread_mutex_unlock(&seat->mutex);
 diff --git a/dlls/winewayland.drv/wayland_pointer.c b/dlls/winewayland.drv/wayland_pointer.c
-index f7e1b5c1a82..c4fdb33a766 100644
+index fb93407088a..d9f932a6862 100644
 --- a/dlls/winewayland.drv/wayland_pointer.c
 +++ b/dlls/winewayland.drv/wayland_pointer.c
 @@ -291,8 +291,8 @@ static void pointer_handle_axis_stop(void *data, struct wl_pointer *wl_pointer,
@@ -66,16 +66,16 @@ index f7e1b5c1a82..c4fdb33a766 100644
  static const struct wl_pointer_listener pointer_listener =
  {
      pointer_handle_enter,
-@@ -335,8 +329,7 @@ static const struct wl_pointer_listener pointer_listener =
-     pointer_handle_frame,
+@@ -336,9 +330,6 @@ static const struct wl_pointer_listener pointer_listener =
      pointer_handle_axis_source,
      pointer_handle_axis_stop,
--    pointer_handle_axis_discrete,
+     pointer_handle_axis_discrete,
+-#ifdef WL_POINTER_AXIS_VALUE120_SINCE_VERSION
 -    pointer_handle_axis_value120
-+    pointer_handle_axis_discrete
+-#endif
  };
  
  /**********************************************************************
 -- 
-2.52.0
+2.53.0
 

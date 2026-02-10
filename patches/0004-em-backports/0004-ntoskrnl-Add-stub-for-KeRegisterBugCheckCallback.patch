@@ -1,8 +1,8 @@
-From f508131ca1b6566e9289f09759b5a3504c70aa12 Mon Sep 17 00:00:00 2001
+From ecdc52f7e02fe79f6ac9b4bcd1d185603d07553d Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:48:42 -0400
-Subject: [PATCH 06/17] ntoskrnl: Add stub for KeRegisterBugCheckCallback.
+Subject: [PATCH 04/15] ntoskrnl: Add stub for KeRegisterBugCheckCallback.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 11 +++++++++++
@@ -10,10 +10,10 @@ Subject: [PATCH 06/17] ntoskrnl: Add stub for KeRegisterBugCheckCallback.
  2 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 5977a372222..74710cb7114 100644
+index d894ff7c4b2..5ce525bbb66 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2828,6 +2828,17 @@ void WINAPI KeRevertToUserAffinityThreadEx(KAFFINITY affinity)
+@@ -2858,6 +2858,17 @@ void WINAPI KeRevertToUserAffinityThreadEx(KAFFINITY affinity)
      thread->user_affinity = affinity;
  }
  
@@ -32,7 +32,7 @@ index 5977a372222..74710cb7114 100644
   *           IoRegisterFileSystem   (NTOSKRNL.EXE.@)
   */
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index d8a5422d8ac..d146c56a38a 100644
+index 0ede9db2354..42cd20faa17 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -629,7 +629,7 @@
@@ -45,5 +45,5 @@ index d8a5422d8ac..d146c56a38a 100644
  @ stub KeReleaseInterruptSpinLock
  @ stub KeReleaseMutant
 -- 
-2.52.0
+2.53.0
 

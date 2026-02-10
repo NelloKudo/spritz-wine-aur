@@ -1,8 +1,8 @@
-From 1f80883826bed880023a6587b05dd466fa9625ce Mon Sep 17 00:00:00 2001
+From 334bce28285f8c193362ab2478d84188fb7d345c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 21:56:28 -0400
-Subject: [PATCH 17/17] ntoskrnl: Implement MmGetPhysicalMemoryRanges.
+Subject: [PATCH 15/15] ntoskrnl: Implement MmGetPhysicalMemoryRanges.
 
 probably can be moved to dll attach
 ---
@@ -10,10 +10,10 @@ probably can be moved to dll attach
  1 file changed, 11 insertions(+), 5 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 4e268a40e89..a6d728d3853 100644
+index 3f9ed7cec6e..7c23af7d3bd 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -3082,12 +3082,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
+@@ -3112,12 +3112,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
  
  PHYSICAL_MEMORY_RANGE *WINAPI MmGetPhysicalMemoryRanges(void)
  {
@@ -38,5 +38,5 @@ index 4e268a40e89..a6d728d3853 100644
      return &range;
  }
 -- 
-2.52.0
+2.53.0
 

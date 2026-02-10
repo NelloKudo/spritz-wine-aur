@@ -1,18 +1,18 @@
-From 2a3577ca24c6b1e5f0ba51727b9d0c3133ffa48c Mon Sep 17 00:00:00 2001
+From a759d05921ebbbfb8a874e2ecf7faab4de81b6e4 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 02:34:36 -0400
-Subject: [PATCH 14/17] fixup! ntoskrnl: Fix bugs with create_process_object.
+Subject: [PATCH 12/15] fixup! ntoskrnl: Fix bugs with create_process_object.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 48 +++++++++++++++++++-----------------
  1 file changed, 26 insertions(+), 22 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 1c94f55076f..cf7b35d356d 100644
+index 8fcdccc030d..c2d5a64dd42 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2453,11 +2453,12 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
+@@ -2483,11 +2483,12 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
  
  static void *create_process_object( HANDLE handle )
  {
@@ -27,7 +27,7 @@ index 1c94f55076f..cf7b35d356d 100644
  
      if (!(process = alloc_kernel_object( PsProcessType, handle, sizeof(*process), 0 ))) return NULL;
  
-@@ -2467,32 +2468,35 @@ static void *create_process_object( HANDLE handle )
+@@ -2497,32 +2498,35 @@ static void *create_process_object( HANDLE handle )
      NtQueryInformationProcess( handle, ProcessSessionInformation, &process->session_id, sizeof(process->session_id), NULL );
      NtQueryInformationProcess( handle, ProcessTimes, &process->times, sizeof(process->times), NULL );
  
@@ -84,5 +84,5 @@ index 1c94f55076f..cf7b35d356d 100644
  }
  
 -- 
-2.52.0
+2.53.0
 

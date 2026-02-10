@@ -1,8 +1,8 @@
-From 01c9a69606b77f7d639e1db3d7d2da4a1c0be5de Mon Sep 17 00:00:00 2001
+From 40943fc072153f219590cc57d534050c693607e9 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:46:14 -0400
-Subject: [PATCH 16/17] ntoskrnl: Add stub for KeCapturePersistentThreadState.
+Subject: [PATCH 14/15] ntoskrnl: Add stub for KeCapturePersistentThreadState.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 8 ++++++++
@@ -10,10 +10,10 @@ Subject: [PATCH 16/17] ntoskrnl: Add stub for KeCapturePersistentThreadState.
  2 files changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 23369ab2a7f..4e268a40e89 100644
+index 44d9c9c353f..3f9ed7cec6e 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -4829,6 +4829,14 @@ void WINAPI KeUnstackDetachProcess(KAPC_STATE *apc_state)
+@@ -4859,6 +4859,14 @@ void WINAPI KeUnstackDetachProcess(KAPC_STATE *apc_state)
      FIXME("apc_state %p stub.\n", apc_state);
  }
  
@@ -29,7 +29,7 @@ index 23369ab2a7f..4e268a40e89 100644
  {
      FIXME(": stub.\n");
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index bea7d389839..955750bad1c 100644
+index b304fd87415..7765c4c9b51 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -549,7 +549,7 @@
@@ -42,5 +42,5 @@ index bea7d389839..955750bad1c 100644
  @ stub KeConnectInterrupt
  @ stub KeDcacheFlushCount
 -- 
-2.52.0
+2.53.0
 

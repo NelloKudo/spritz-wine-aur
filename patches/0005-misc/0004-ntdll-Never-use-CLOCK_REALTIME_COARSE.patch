@@ -1,7 +1,7 @@
-From 4c6bbb73dc2b67ba046892a20bf994aa53e67c72 Mon Sep 17 00:00:00 2001
+From 730d15224cc78393593195443ae3e6a0f90dabbb Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Sat, 28 Dec 2024 06:45:10 -0800
-Subject: [PATCH 5/5] ntdll: Never use CLOCK_REALTIME_COARSE.
+Subject: [PATCH 4/5] ntdll: Never use CLOCK_REALTIME_COARSE.
 
 This is required for deterministic timekeeping, as
 CLOCK_REALTIME_COARSE depends on the kernel tickrate.
@@ -40,5 +40,5 @@ index e59f2113f5a..fd0878bf093 100644
          time->QuadPart = ticks_from_time_t( ts.tv_sec ) + (ts.tv_nsec + 50) / 100;
      }
 -- 
-2.52.0
+2.53.0
 

@@ -1,7 +1,7 @@
-From 68956d83daf70544e6e90857a1c199b98a23f2d8 Mon Sep 17 00:00:00 2001
+From 064bdef48a1e6ac8dd71da717d1ef19cdd84d57e Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Tue, 20 Jan 2026 16:33:26 +0100
-Subject: [PATCH 3/5] HACK: kernel32: Spoof GetProcAddress of
+Subject: [PATCH 2/5] HACK: kernel32: Spoof GetProcAddress of
  KiUserApcDispatcher and KiUserCallbackDispatcher.
 
 ---
@@ -46,5 +46,5 @@ index ed15e57c29c..54cf01e04ff 100644
          if (!set_ntstatus( LdrGetProcedureAddress( hModule, &str, 0, (void**)&fp ))) return NULL;
      }
 -- 
-2.52.0
+2.53.0
 

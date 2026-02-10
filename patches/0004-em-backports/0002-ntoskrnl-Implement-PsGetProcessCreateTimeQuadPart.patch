@@ -1,8 +1,8 @@
-From 6a8451f11e05bc6eaa7e6b70693453f12a3959eb Mon Sep 17 00:00:00 2001
+From 6223c45d846bd91d8fba74fca3d897ae4b796665 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:04:12 -0400
-Subject: [PATCH 04/17] ntoskrnl: Implement PsGetProcessCreateTimeQuadPart.
+Subject: [PATCH 02/15] ntoskrnl: Implement PsGetProcessCreateTimeQuadPart.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 10 ++++++++++
@@ -11,10 +11,10 @@ Subject: [PATCH 04/17] ntoskrnl: Implement PsGetProcessCreateTimeQuadPart.
  3 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index fd75bc1a0a0..7fb28dddb5d 100644
+index 51ad3bd5992..98a517b3ccf 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2461,6 +2461,7 @@ static void *create_process_object( HANDLE handle )
+@@ -2491,6 +2491,7 @@ static void *create_process_object( HANDLE handle )
      process->header.WaitListHead.Blink = INVALID_HANDLE_VALUE; /* mark as kernel object */
      NtQueryInformationProcess( handle, ProcessBasicInformation, &process->info, sizeof(process->info), NULL );
      NtQueryInformationProcess( handle, ProcessSessionInformation, &process->session_id, sizeof(process->session_id), NULL );
@@ -22,7 +22,7 @@ index fd75bc1a0a0..7fb28dddb5d 100644
      IsWow64Process( handle, &process->wow64 );
  
      return process;
-@@ -2532,6 +2533,15 @@ ULONG WINAPI PsGetProcessSessionId( PEPROCESS process )
+@@ -2562,6 +2563,15 @@ ULONG WINAPI PsGetProcessSessionId( PEPROCESS process )
      return process->session_id;
  }
  
@@ -39,7 +39,7 @@ index fd75bc1a0a0..7fb28dddb5d 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 3d3c975805d..ef6573aa2c1 100644
+index 7886d2c703f..e6dcee8649b 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -921,7 +921,7 @@
@@ -52,10 +52,10 @@ index 3d3c975805d..ef6573aa2c1 100644
  @ stub PsGetProcessExitProcessCalled
  @ stub PsGetProcessExitStatus
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index fb596355b9a..b7702f0b6e6 100644
+index 5374089505c..3e468dec295 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-@@ -54,6 +54,7 @@ struct _EPROCESS
+@@ -55,6 +55,7 @@ struct _EPROCESS
  {
      DISPATCHER_HEADER header;
      PROCESS_BASIC_INFORMATION info;
@@ -64,5 +64,5 @@ index fb596355b9a..b7702f0b6e6 100644
      ULONG session_id;
  };
 -- 
-2.52.0
+2.53.0
 
