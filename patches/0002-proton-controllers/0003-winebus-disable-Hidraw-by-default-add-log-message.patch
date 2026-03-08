@@ -1,4 +1,4 @@
-From e47dc5b571efbd82edd41991fb82b2666e5afb43 Mon Sep 17 00:00:00 2001
+From a470bff79c2e0009f5d8fcf14f749b67ef4af04d Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 17:07:35 +0200
 Subject: [PATCH 3/7] winebus: disable Hidraw by default, add log message
@@ -11,10 +11,10 @@ in logs, as PROTON_ENABLE_HIDRAW=1 fixes it.
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/winebus.sys/main.c b/dlls/winebus.sys/main.c
-index 2f66e597bcd..005fbf5ebd4 100644
+index f449271a549..b61fc140a10 100644
 --- a/dlls/winebus.sys/main.c
 +++ b/dlls/winebus.sys/main.c
-@@ -532,6 +532,10 @@ static DWORD check_bus_option(const WCHAR *option, DWORD default_value)
+@@ -531,6 +531,10 @@ static DWORD check_bus_option(const WCHAR *option, DWORD default_value)
          if (info->Type == REG_DWORD) return *(DWORD *)info->Data;
      }
  
@@ -25,7 +25,7 @@ index 2f66e597bcd..005fbf5ebd4 100644
      return default_value;
  }
  
-@@ -1229,7 +1233,7 @@ static void bus_options_init(void)
+@@ -1223,7 +1227,7 @@ static void bus_options_init(void)
  {
      options.disable_sdl = !check_bus_option(L"Enable SDL", 1);
      if (options.disable_sdl) TRACE("SDL devices disabled in registry\n");
@@ -35,5 +35,5 @@ index 2f66e597bcd..005fbf5ebd4 100644
      options.disable_input = check_bus_option(L"DisableInput", 0);
      if (options.disable_input) TRACE("UDEV input devices disabled in registry\n");
 -- 
-2.52.0
+2.53.0
 

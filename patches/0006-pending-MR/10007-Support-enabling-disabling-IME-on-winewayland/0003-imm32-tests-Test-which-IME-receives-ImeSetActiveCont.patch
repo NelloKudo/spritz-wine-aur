@@ -1,7 +1,7 @@
-From c6572a15d8d4fda1caca96f1e5e0a3a4c55cdff7 Mon Sep 17 00:00:00 2001
+From 31ce086eb901b5dee75974719a85c3436ec0e142 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Tue, 3 Feb 2026 18:30:01 +0100
-Subject: [PATCH] imm32/tests: Test which IME receives ImeSetActiveContext
+Subject: [PATCH 3/4] imm32/tests: Test which IME receives ImeSetActiveContext
  deactivation call after layout change.
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH] imm32/tests: Test which IME receives ImeSetActiveContext
  1 file changed, 21 insertions(+)
 
 diff --git a/dlls/imm32/tests/imm32.c b/dlls/imm32/tests/imm32.c
-index fed49315d3b..92201dcfeb9 100644
+index 5e6d847fed2..229dcfd1c1e 100644
 --- a/dlls/imm32/tests/imm32.c
 +++ b/dlls/imm32/tests/imm32.c
 @@ -5584,6 +5584,27 @@ static void test_ImmSetActiveContext(void)
@@ -41,5 +41,5 @@ index fed49315d3b..92201dcfeb9 100644
      memset( ime_calls, 0, sizeof(ime_calls) );
      ime_call_count = 0;
 -- 
-GitLab
+2.53.0
 

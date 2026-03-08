@@ -1,7 +1,7 @@
-From 730d15224cc78393593195443ae3e6a0f90dabbb Mon Sep 17 00:00:00 2001
+From 5544eb0b795d8455dce9f148e465e07312facc22 Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Sat, 28 Dec 2024 06:45:10 -0800
-Subject: [PATCH 4/5] ntdll: Never use CLOCK_REALTIME_COARSE.
+Subject: [PATCH 04/10] ntdll: Never use CLOCK_REALTIME_COARSE.
 
 This is required for deterministic timekeeping, as
 CLOCK_REALTIME_COARSE depends on the kernel tickrate.
@@ -12,10 +12,10 @@ performance degradation by using CLOCK_REALTIME instead.
  1 file changed, 1 insertion(+), 16 deletions(-)
 
 diff --git a/dlls/ntdll/unix/sync.c b/dlls/ntdll/unix/sync.c
-index e59f2113f5a..fd0878bf093 100644
+index bc9bbf2c30d..ee1d630087b 100644
 --- a/dlls/ntdll/unix/sync.c
 +++ b/dlls/ntdll/unix/sync.c
-@@ -2485,22 +2485,7 @@ NTSTATUS WINAPI NtQuerySystemTime( LARGE_INTEGER *time )
+@@ -2484,22 +2484,7 @@ NTSTATUS WINAPI NtQuerySystemTime( LARGE_INTEGER *time )
  {
  #ifdef HAVE_CLOCK_GETTIME
      struct timespec ts;

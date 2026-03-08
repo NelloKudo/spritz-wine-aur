@@ -1,8 +1,8 @@
-From 6223c45d846bd91d8fba74fca3d897ae4b796665 Mon Sep 17 00:00:00 2001
+From ae1fd093bd7af48281d732c89878273653d12655 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:04:12 -0400
-Subject: [PATCH 02/15] ntoskrnl: Implement PsGetProcessCreateTimeQuadPart.
+Subject: [PATCH 02/22] ntoskrnl: Implement PsGetProcessCreateTimeQuadPart.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 10 ++++++++++
@@ -11,7 +11,7 @@ Subject: [PATCH 02/15] ntoskrnl: Implement PsGetProcessCreateTimeQuadPart.
  3 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 51ad3bd5992..98a517b3ccf 100644
+index 77ba5aa0f2f..b9e85eb1797 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
 @@ -2491,6 +2491,7 @@ static void *create_process_object( HANDLE handle )
@@ -39,10 +39,10 @@ index 51ad3bd5992..98a517b3ccf 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 7886d2c703f..e6dcee8649b 100644
+index 51428453091..599388ee4c2 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -921,7 +921,7 @@
+@@ -922,7 +922,7 @@
  @ stub PsGetJobLock
  @ stub PsGetJobSessionId
  @ stub PsGetJobUIRestrictionsClass
@@ -52,10 +52,10 @@ index 7886d2c703f..e6dcee8649b 100644
  @ stub PsGetProcessExitProcessCalled
  @ stub PsGetProcessExitStatus
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index 5374089505c..3e468dec295 100644
+index 8a68ab3e874..1ae2b45d61a 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-@@ -55,6 +55,7 @@ struct _EPROCESS
+@@ -53,6 +53,7 @@ struct _EPROCESS
  {
      DISPATCHER_HEADER header;
      PROCESS_BASIC_INFORMATION info;

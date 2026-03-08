@@ -1,8 +1,8 @@
-From 40943fc072153f219590cc57d534050c693607e9 Mon Sep 17 00:00:00 2001
+From 44007152660f15b0911bb93e67fb0ff728d64d0b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:46:14 -0400
-Subject: [PATCH 14/15] ntoskrnl: Add stub for KeCapturePersistentThreadState.
+Subject: [PATCH 14/22] ntoskrnl: Add stub for KeCapturePersistentThreadState.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 8 ++++++++
@@ -10,11 +10,11 @@ Subject: [PATCH 14/15] ntoskrnl: Add stub for KeCapturePersistentThreadState.
  2 files changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 44d9c9c353f..3f9ed7cec6e 100644
+index 4c833e9b293..5c5d24e4568 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -4859,6 +4859,14 @@ void WINAPI KeUnstackDetachProcess(KAPC_STATE *apc_state)
-     FIXME("apc_state %p stub.\n", apc_state);
+@@ -4866,6 +4866,14 @@ NTSTATUS WINAPI KdChangeOption(ULONG option, ULONG in_size, PVOID in_buffer,
+     return STATUS_DEBUGGER_INACTIVE;
  }
  
 +NTSTATUS WINAPI KeCapturePersistentThreadState(CONTEXT *context, PKTHREAD thread, ULONG code,
@@ -29,10 +29,10 @@ index 44d9c9c353f..3f9ed7cec6e 100644
  {
      FIXME(": stub.\n");
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index b304fd87415..7765c4c9b51 100644
+index bbd4b91635c..26dab1cd571 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -549,7 +549,7 @@
+@@ -550,7 +550,7 @@
  @ stdcall KeBugCheck(long)
  @ stdcall KeBugCheckEx(long long long long long)
  @ stdcall KeCancelTimer(ptr)

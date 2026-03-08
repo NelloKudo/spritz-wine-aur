@@ -1,15 +1,15 @@
-From a759d05921ebbbfb8a874e2ecf7faab4de81b6e4 Mon Sep 17 00:00:00 2001
+From 78d401ad6869c3a286a2c3e60635dda8d35d3b90 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 02:34:36 -0400
-Subject: [PATCH 12/15] fixup! ntoskrnl: Fix bugs with create_process_object.
+Subject: [PATCH 12/22] fixup! ntoskrnl: Fix bugs with create_process_object.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 48 +++++++++++++++++++-----------------
  1 file changed, 26 insertions(+), 22 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 8fcdccc030d..c2d5a64dd42 100644
+index 4de34f418fd..ef89e2c0157 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
 @@ -2483,11 +2483,12 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi

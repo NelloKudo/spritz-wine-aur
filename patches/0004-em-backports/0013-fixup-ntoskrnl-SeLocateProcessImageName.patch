@@ -1,8 +1,8 @@
-From 1f32b44af49b264410ac7210ac5952eee91395da Mon Sep 17 00:00:00 2001
+From 674b672787f537050713d9c0bd6737d2f67d1528 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:39:47 -0400
-Subject: [PATCH 13/15] fixup! ntoskrnl: SeLocateProcessImageName.
+Subject: [PATCH 13/22] fixup! ntoskrnl: SeLocateProcessImageName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 72 +++++++++++++++++++++-------
@@ -11,7 +11,7 @@ Subject: [PATCH 13/15] fixup! ntoskrnl: SeLocateProcessImageName.
  3 files changed, 62 insertions(+), 21 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index c2d5a64dd42..44d9c9c353f 100644
+index ef89e2c0157..4c833e9b293 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
 @@ -2488,7 +2488,7 @@ static void *create_process_object( HANDLE handle )
@@ -147,10 +147,10 @@ index c2d5a64dd42..44d9c9c353f 100644
  }
  
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index e8dc2848ffe..b304fd87415 100644
+index 71701e578d1..bbd4b91635c 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -727,7 +727,7 @@
+@@ -728,7 +728,7 @@
  @ stdcall MmFreeNonCachedMemory(ptr long)
  @ stub MmFreePagesFromMdl
  @ stdcall MmGetPhysicalAddress(ptr)
@@ -160,10 +160,10 @@ index e8dc2848ffe..b304fd87415 100644
  @ stdcall MmGetVirtualForPhysical(int64)
  @ stub MmGrowKernelStack
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index 77f2c42d622..57ce7991a68 100644
+index 48db065c368..d2f30b79177 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-@@ -57,9 +57,8 @@ struct _EPROCESS
+@@ -55,9 +55,8 @@ struct _EPROCESS
      PROCESS_BASIC_INFORMATION info;
      KERNEL_USER_TIMES times;
      BOOL wow64;
@@ -174,7 +174,7 @@ index 77f2c42d622..57ce7991a68 100644
      char imageName[15];
  };
  
-@@ -77,6 +76,12 @@ struct _ETHREAD
+@@ -75,6 +74,12 @@ struct _ETHREAD
      struct _KTHREAD kthread;
  };
  

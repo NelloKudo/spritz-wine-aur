@@ -1,8 +1,8 @@
-From d73665c46268e6b50ea84bed40b6a083a7988391 Mon Sep 17 00:00:00 2001
+From be6c140e6d24b54c95fc439a41efd8fe7f814251 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 22:11:36 -0400
-Subject: [PATCH 08/15] ntoskrnl: Implement PsGetProcessImageFileName.
+Subject: [PATCH 08/22] ntoskrnl: Implement PsGetProcessImageFileName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 19 +++++++++++++++++++
@@ -11,7 +11,7 @@ Subject: [PATCH 08/15] ntoskrnl: Implement PsGetProcessImageFileName.
  3 files changed, 21 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index bddba474758..51dbba9e44c 100644
+index 03dd54c02e5..a00088c03bd 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
 @@ -2484,6 +2484,8 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
@@ -55,10 +55,10 @@ index bddba474758..51dbba9e44c 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index c25b8569b65..8cdd5672c9a 100644
+index 87074707655..112e1cb7612 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -927,7 +927,7 @@
+@@ -928,7 +928,7 @@
  @ stub PsGetProcessExitStatus
  @ stub PsGetProcessExitTime
  @ stdcall PsGetProcessId(ptr)
@@ -68,10 +68,10 @@ index c25b8569b65..8cdd5672c9a 100644
  @ stub PsGetProcessJob
  @ stub PsGetProcessPeb
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index 3e468dec295..42a3340144e 100644
+index 1ae2b45d61a..ef9bc16b1f8 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-@@ -58,6 +58,7 @@ struct _EPROCESS
+@@ -56,6 +56,7 @@ struct _EPROCESS
      KERNEL_USER_TIMES times;
      BOOL wow64;
      ULONG session_id;

@@ -1,8 +1,8 @@
-From c86f82a9d48a2e95df1bf59346b6bb671c6ea7f4 Mon Sep 17 00:00:00 2001
+From 613b6b2ad80cf6ed25747fc0c06086484bf39a65 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 23:32:46 -0400
-Subject: [PATCH 09/15] ntoskrnl: Implement SeLocateProcessImageName.
+Subject: [PATCH 09/22] ntoskrnl: Implement SeLocateProcessImageName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 51 ++++++++++++++++++++++++----
@@ -10,7 +10,7 @@ Subject: [PATCH 09/15] ntoskrnl: Implement SeLocateProcessImageName.
  2 files changed, 47 insertions(+), 7 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 51dbba9e44c..b270e9361dc 100644
+index a00088c03bd..0198f12dec6 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
 @@ -2483,9 +2483,10 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
@@ -104,10 +104,10 @@ index 51dbba9e44c..b270e9361dc 100644
  
  /*********************************************************************
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index 42a3340144e..8550125d51d 100644
+index ef9bc16b1f8..41f6e73159d 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-@@ -58,7 +58,8 @@ struct _EPROCESS
+@@ -56,7 +56,8 @@ struct _EPROCESS
      KERNEL_USER_TIMES times;
      BOOL wow64;
      ULONG session_id;

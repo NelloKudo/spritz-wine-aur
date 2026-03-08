@@ -1,7 +1,7 @@
-From 179668271443e810ecd73f8ec3b135ba2a9a25fc Mon Sep 17 00:00:00 2001
+From 49833d441be6bb798067ccae9253bbaf9a5b6564 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 14 Dec 2022 21:21:50 +0100
-Subject: [PATCH 1/5] HACK: winex11.drv: Workaround focusing out of exclusive
+Subject: [PATCH 01/10] HACK: winex11.drv: Workaround focusing out of exclusive
  fullscreen windows.
 
 This retargets some old window manager workarounds which don't seem to
@@ -28,10 +28,10 @@ Original commits were:
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/winex11.drv/window.c b/dlls/winex11.drv/window.c
-index a9f6dd08276..044a3ad6787 100644
+index b43cfc55e05..a3453726154 100644
 --- a/dlls/winex11.drv/window.c
 +++ b/dlls/winex11.drv/window.c
-@@ -1498,7 +1498,15 @@ static void update_net_wm_states( struct x11drv_win_data *data )
+@@ -1500,7 +1500,15 @@ static void update_net_wm_states( struct x11drv_win_data *data )
          new_state |= (1 << NET_WM_STATE_MAXIMIZED);
  
      ex_style = NtUserGetWindowLongW( data->hwnd, GWL_EXSTYLE );

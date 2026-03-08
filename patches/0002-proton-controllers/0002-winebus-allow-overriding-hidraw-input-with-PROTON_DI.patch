@@ -1,4 +1,4 @@
-From f2f9b1541103d92cd55f3989028463cb6e4235ed Mon Sep 17 00:00:00 2001
+From 00d13f480e1583d13d0f8fc3122407177b46fa0a Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 15:44:20 +0200
 Subject: [PATCH 2/7] winebus: allow overriding hidraw/input with
@@ -15,10 +15,10 @@ the latest wine-tkg releases and might prove helpful to someone.
  2 files changed, 49 insertions(+), 7 deletions(-)
 
 diff --git a/dlls/winebus.sys/main.c b/dlls/winebus.sys/main.c
-index 4e2227bb636..2f66e597bcd 100644
+index 0132297a4a6..f449271a549 100644
 --- a/dlls/winebus.sys/main.c
 +++ b/dlls/winebus.sys/main.c
-@@ -494,6 +494,36 @@ static DWORD check_bus_option(const WCHAR *option, DWORD default_value)
+@@ -493,6 +493,36 @@ static DWORD check_bus_option(const WCHAR *option, DWORD default_value)
      KEY_VALUE_PARTIAL_INFORMATION *info = (KEY_VALUE_PARTIAL_INFORMATION *)buffer;
      UNICODE_STRING str;
      DWORD size;
@@ -56,10 +56,10 @@ index 4e2227bb636..2f66e597bcd 100644
      /* @@ Wine registry key: HKLM\System\CurrentControlSet\Services\WineBus */
      RtlInitUnicodeString(&str, option);
 diff --git a/programs/services/services.c b/programs/services/services.c
-index dff3cd60040..87ac399989c 100644
+index 0830a75016b..f43318b62a4 100644
 --- a/programs/services/services.c
 +++ b/programs/services/services.c
-@@ -1030,15 +1030,27 @@ found:
+@@ -1033,15 +1033,27 @@ found:
  
      if (!environment && OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY | TOKEN_DUPLICATE, &token))
      {
@@ -95,5 +95,5 @@ index dff3cd60040..87ac399989c 100644
          CloseHandle(token);
      }
 -- 
-2.52.0
+2.53.0
 

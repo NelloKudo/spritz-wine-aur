@@ -1,4 +1,4 @@
-From f079e57b8311184c0a4a91db1a16f111d8a08172 Mon Sep 17 00:00:00 2001
+From 2e9875a3e92b475a75898518296c5cdcf931232e Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 14:56:23 +0200
 Subject: [PATCH 1/7] wbemprox: Only return linked PnP devices in
@@ -17,10 +17,10 @@ Fixes issues with controllers after enabling/disabling Hidraw.
  1 file changed, 138 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/wbemprox/builtin.c b/dlls/wbemprox/builtin.c
-index ff208fc7953..e64159dc97e 100644
+index 70d0364dfe9..75cd5016d99 100644
 --- a/dlls/wbemprox/builtin.c
 +++ b/dlls/wbemprox/builtin.c
-@@ -42,6 +42,7 @@
+@@ -41,6 +41,7 @@
  #include "ntddstor.h"
  #include "setupapi.h"
  #include "devguid.h"
@@ -28,7 +28,7 @@ index ff208fc7953..e64159dc97e 100644
  
  #include "wine/debug.h"
  #include "wbemprox_private.h"
-@@ -3564,6 +3565,133 @@ static WCHAR *build_pnp_device_id( const WCHAR *class, const WCHAR *product, con
+@@ -3563,6 +3564,133 @@ static WCHAR *build_pnp_device_id( const WCHAR *class, const WCHAR *product, con
      return ret;
  }
  
@@ -162,7 +162,7 @@ index ff208fc7953..e64159dc97e 100644
  static struct record_pnpentity *get_pnp_entities( UINT *count )
  {
      WCHAR class[MAX_PATH], product[MAX_PATH], instance[MAX_PATH];
-@@ -3592,9 +3720,18 @@ static struct record_pnpentity *get_pnp_entities( UINT *count )
+@@ -3591,9 +3719,18 @@ static struct record_pnpentity *get_pnp_entities( UINT *count )
                      {
                          if (!RegOpenKeyExW( key_product, instance, 0, KEY_READ, &key_instance ))
                          {
@@ -183,5 +183,5 @@ index ff208fc7953..e64159dc97e 100644
                              ret[i].name = get_reg_value( key_instance, L"DeviceDesc" );
                              ret[i].service = get_reg_value( key_instance, L"Service" );
 -- 
-2.52.0
+2.53.0
 

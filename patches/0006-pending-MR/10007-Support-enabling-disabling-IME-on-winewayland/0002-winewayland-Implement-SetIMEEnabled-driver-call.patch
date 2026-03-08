@@ -1,7 +1,7 @@
-From 0c81c9fe657ef9b2c3366513364e0243fc84c4fb Mon Sep 17 00:00:00 2001
+From bec44b22a41c1b8a0f7a5e19ac3e8fc987152345 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Sun, 1 Feb 2026 01:56:27 +0100
-Subject: [PATCH] winewayland: Implement SetIMEEnabled driver call.
+Subject: [PATCH 2/4] winewayland: Implement SetIMEEnabled driver call.
 
 ---
  dlls/winewayland.drv/wayland_text_input.c | 93 ++++++++++++++++++++---
@@ -171,10 +171,10 @@ index 52cfef27e50..0bbab4e75c4 100644
 +    return FALSE;
 +}
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 9452d237fa3..701e48a2059 100644
+index 72011d1361f..854cc4e1edc 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -129,6 +129,7 @@ struct wayland_text_input
+@@ -130,6 +130,7 @@ struct wayland_text_input
      } preedit, current_preedit;
      WCHAR *commit_string;
      HWND focused_hwnd;
@@ -182,7 +182,7 @@ index 9452d237fa3..701e48a2059 100644
      pthread_mutex_t mutex;
  };
  
-@@ -372,6 +373,8 @@ struct wayland_win_data
+@@ -377,6 +378,8 @@ struct wayland_win_data
      BOOL is_fullscreen;
      BOOL managed;
      BOOL layered_attribs_set;
@@ -191,7 +191,7 @@ index 9452d237fa3..701e48a2059 100644
  };
  
  struct wayland_win_data *wayland_win_data_get(HWND hwnd);
-@@ -443,6 +446,7 @@ BOOL WAYLAND_ClipCursor(const RECT *clip, BOOL reset);
+@@ -448,6 +451,7 @@ BOOL WAYLAND_ClipCursor(const RECT *clip, BOOL reset);
  LRESULT WAYLAND_DesktopWindowProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
  void WAYLAND_DestroyWindow(HWND hwnd);
  BOOL WAYLAND_SetIMECompositionRect(HWND hwnd, RECT rect);
@@ -200,10 +200,10 @@ index 9452d237fa3..701e48a2059 100644
  BOOL WAYLAND_SetCursorPos(INT x, INT y);
  void WAYLAND_SetLayeredWindowAttributes(HWND hwnd, COLORREF key, BYTE alpha, DWORD flags);
 diff --git a/dlls/winewayland.drv/waylanddrv_main.c b/dlls/winewayland.drv/waylanddrv_main.c
-index cdb5dd8a956..c8c801d63b8 100644
+index cbbaf729560..9c601f52d49 100644
 --- a/dlls/winewayland.drv/waylanddrv_main.c
 +++ b/dlls/winewayland.drv/waylanddrv_main.c
-@@ -40,6 +40,7 @@ static const struct user_driver_funcs waylanddrv_funcs =
+@@ -39,6 +39,7 @@ static const struct user_driver_funcs waylanddrv_funcs =
      .pDesktopWindowProc = WAYLAND_DesktopWindowProc,
      .pDestroyWindow = WAYLAND_DestroyWindow,
      .pSetIMECompositionRect = WAYLAND_SetIMECompositionRect,
@@ -212,10 +212,10 @@ index cdb5dd8a956..c8c801d63b8 100644
      .pReleaseKbdTables = WAYLAND_ReleaseKbdTables,
      .pSetCursor = WAYLAND_SetCursor,
 diff --git a/dlls/winewayland.drv/window.c b/dlls/winewayland.drv/window.c
-index 07e0858fb39..2d96d457b52 100644
+index 16386e3349d..bf6621602c7 100644
 --- a/dlls/winewayland.drv/window.c
 +++ b/dlls/winewayland.drv/window.c
-@@ -72,6 +72,8 @@ static struct wayland_win_data *wayland_win_data_create(HWND hwnd, const struct
+@@ -71,6 +71,8 @@ static struct wayland_win_data *wayland_win_data_create(HWND hwnd, const struct
  
      data->hwnd = hwnd;
      data->rects = *rects;
@@ -225,5 +225,5 @@ index 07e0858fb39..2d96d457b52 100644
      pthread_mutex_lock(&win_data_mutex);
  
 -- 
-GitLab
+2.53.0
 

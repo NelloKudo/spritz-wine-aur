@@ -1,7 +1,7 @@
-From 5081bc2d28e6b36013551bb03fea2e4093311703 Mon Sep 17 00:00:00 2001
+From 0f663d6d00cc040a3438636e6c917be6f39fa991 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Sun, 1 Feb 2026 01:54:17 +0100
-Subject: [PATCH] win32u: Add SetIMEEnabled driver call.
+Subject: [PATCH 1/4] win32u: Add SetIMEEnabled driver call.
 
 ---
  dlls/win32u/driver.c      | 12 ++++++++++++
@@ -9,10 +9,10 @@ Subject: [PATCH] win32u: Add SetIMEEnabled driver call.
  2 files changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/win32u/driver.c b/dlls/win32u/driver.c
-index 60aba702d1a..42f4a11175d 100644
+index c9e81016ee8..3804ce8225b 100644
 --- a/dlls/win32u/driver.c
 +++ b/dlls/win32u/driver.c
-@@ -685,6 +685,11 @@ static BOOL nulldrv_SetIMECompositionRect( HWND hwnd, RECT rect )
+@@ -684,6 +684,11 @@ static BOOL nulldrv_SetIMECompositionRect( HWND hwnd, RECT rect )
      return FALSE;
  }
  
@@ -24,7 +24,7 @@ index 60aba702d1a..42f4a11175d 100644
  static LRESULT nulldrv_DesktopWindowProc( HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam )
  {
      return default_window_proc( hwnd, msg, wparam, lparam, FALSE );
-@@ -1113,6 +1118,11 @@ static BOOL loaderdrv_SetIMECompositionRect( HWND hwnd, RECT rect )
+@@ -1112,6 +1117,11 @@ static BOOL loaderdrv_SetIMECompositionRect( HWND hwnd, RECT rect )
      return load_driver()->pSetIMECompositionRect( hwnd, rect );
  }
  
@@ -36,7 +36,7 @@ index 60aba702d1a..42f4a11175d 100644
  static LONG loaderdrv_ChangeDisplaySettings( LPDEVMODEW displays, LPCWSTR primary_name, HWND hwnd,
                                               DWORD flags, LPVOID lparam )
  {
-@@ -1258,6 +1268,7 @@ static const struct user_driver_funcs lazy_load_driver =
+@@ -1257,6 +1267,7 @@ static const struct user_driver_funcs lazy_load_driver =
      loaderdrv_ImeProcessKey,
      loaderdrv_NotifyIMEStatus,
      loaderdrv_SetIMECompositionRect,
@@ -44,7 +44,7 @@ index 60aba702d1a..42f4a11175d 100644
      /* cursor/icon functions */
      nulldrv_DestroyCursorIcon,
      loaderdrv_SetCursor,
-@@ -1362,6 +1373,7 @@ void __wine_set_user_driver( const struct user_driver_funcs *funcs, UINT version
+@@ -1361,6 +1372,7 @@ void __wine_set_user_driver( const struct user_driver_funcs *funcs, UINT version
      SET_USER_FUNC(ImeProcessKey);
      SET_USER_FUNC(NotifyIMEStatus);
      SET_USER_FUNC(SetIMECompositionRect);
@@ -74,5 +74,5 @@ index f6390bce878..07e8d160691 100644
      void    (*pDestroyCursorIcon)(HCURSOR);
      void    (*pSetCursor)(HWND,HCURSOR);
 -- 
-GitLab
+2.53.0
 

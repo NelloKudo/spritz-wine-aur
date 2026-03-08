@@ -1,14 +1,14 @@
-From 587074e73d79f7b4bfd85510f0acc917ab0d57c8 Mon Sep 17 00:00:00 2001
+From 580e9814ed9de8d3f2a54106281f6e67ab38d15b Mon Sep 17 00:00:00 2001
 From: mkrsym1 <mkrsym1@gmail.com>
 Date: Mon, 8 Sep 2025 21:05:27 +0200
-Subject: [PATCH 07/10] loader: Copy arial.ttf to fonts
+Subject: [PATCH 7/8] loader: Copy arial.ttf to fonts
 
 ---
  loader/wine.inf.in | 9 +++++++--
  1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/loader/wine.inf.in b/loader/wine.inf.in
-index 7b8fbcce528..e6cf3899fe1 100644
+index 28644bdbe04..e65b776650f 100644
 --- a/loader/wine.inf.in
 +++ b/loader/wine.inf.in
 @@ -54,7 +54,7 @@ AddService=MountMgr,0x800,MountMgrService
@@ -29,7 +29,7 @@ index 7b8fbcce528..e6cf3899fe1 100644
  AddReg=\
      CurrentVersion,\
      Debugger,\
-@@ -1567,10 +1567,14 @@ windows.system.winmd
+@@ -1574,10 +1574,14 @@ windows.system.winmd
  windows.ui.winmd
  windows.ui.xaml.winmd
  
@@ -44,11 +44,11 @@ index 7b8fbcce528..e6cf3899fe1 100644
  
  [DestinationDirs]
  ColorFiles = 23
-@@ -1579,3 +1583,4 @@ InfFiles  = 17
+@@ -1586,3 +1590,4 @@ InfFiles  = 17
  NlsFiles  = 11
  SortFiles = 10,globalization\sorting
  WinmdFiles = 11,winmetadata
 +FontFiles = 20
 -- 
-2.52.0
+2.53.0
 

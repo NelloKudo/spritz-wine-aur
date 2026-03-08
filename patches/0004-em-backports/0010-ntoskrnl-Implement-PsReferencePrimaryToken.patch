@@ -1,8 +1,8 @@
-From 1b2c4782647bb5255fcc74beead4c371364b8e47 Mon Sep 17 00:00:00 2001
+From 181de41382f06ea1701e441c3cd68af14577e2dc Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 00:34:32 -0400
-Subject: [PATCH 10/15] ntoskrnl: Implement PsReferencePrimaryToken.
+Subject: [PATCH 10/22] ntoskrnl: Implement PsReferencePrimaryToken.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 16 ++++++++++++++++
@@ -11,7 +11,7 @@ Subject: [PATCH 10/15] ntoskrnl: Implement PsReferencePrimaryToken.
  3 files changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index b270e9361dc..0b8533da1a2 100644
+index 0198f12dec6..85698381877 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
 @@ -2484,6 +2484,7 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
@@ -59,10 +59,10 @@ index b270e9361dc..0b8533da1a2 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 8cdd5672c9a..6b1bd956266 100644
+index 112e1cb7612..1993ee76422 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -959,7 +959,7 @@
+@@ -960,7 +960,7 @@
  @ stdcall PsLookupThreadByThreadId(ptr ptr)
  @ extern PsProcessType
  @ stub PsReferenceImpersonationToken
@@ -72,10 +72,10 @@ index 8cdd5672c9a..6b1bd956266 100644
  @ stdcall PsReleaseProcessExitSynchronization(ptr)
  @ stdcall PsRemoveCreateThreadNotifyRoutine(ptr)
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl_private.h b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-index 8550125d51d..77f2c42d622 100644
+index 41f6e73159d..48db065c368 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl_private.h
 +++ b/dlls/ntoskrnl.exe/ntoskrnl_private.h
-@@ -58,6 +58,7 @@ struct _EPROCESS
+@@ -56,6 +56,7 @@ struct _EPROCESS
      KERNEL_USER_TIMES times;
      BOOL wow64;
      ULONG session_id;

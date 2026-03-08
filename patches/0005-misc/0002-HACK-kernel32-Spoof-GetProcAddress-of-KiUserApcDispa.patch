@@ -1,7 +1,7 @@
-From 064bdef48a1e6ac8dd71da717d1ef19cdd84d57e Mon Sep 17 00:00:00 2001
+From 4764781cbe45a2c61cbbd23246efbc64e95c8d8e Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Tue, 20 Jan 2026 16:33:26 +0100
-Subject: [PATCH 2/5] HACK: kernel32: Spoof GetProcAddress of
+Subject: [PATCH 02/10] HACK: kernel32: Spoof GetProcAddress of
  KiUserApcDispatcher and KiUserCallbackDispatcher.
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 2/5] HACK: kernel32: Spoof GetProcAddress of
  1 file changed, 19 insertions(+)
 
 diff --git a/dlls/kernel32/module.c b/dlls/kernel32/module.c
-index ed15e57c29c..54cf01e04ff 100644
+index ac880100d38..6c0152c9ca6 100644
 --- a/dlls/kernel32/module.c
 +++ b/dlls/kernel32/module.c
-@@ -262,6 +262,17 @@ BOOL WINAPI GetBinaryTypeA( LPCSTR lpApplicationName, LPDWORD lpBinaryType )
+@@ -261,6 +261,17 @@ BOOL WINAPI GetBinaryTypeA( LPCSTR lpApplicationName, LPDWORD lpBinaryType )
      return GetBinaryTypeW(NtCurrentTeb()->StaticUnicodeString.Buffer, lpBinaryType);
  }
  
@@ -30,7 +30,7 @@ index ed15e57c29c..54cf01e04ff 100644
  /***********************************************************************
   *           GetProcAddress   		(KERNEL32.@)
   *
-@@ -285,6 +296,14 @@ FARPROC get_proc_address( HMODULE hModule, LPCSTR function )
+@@ -284,6 +295,14 @@ FARPROC get_proc_address( HMODULE hModule, LPCSTR function )
      {
          ANSI_STRING     str;
  

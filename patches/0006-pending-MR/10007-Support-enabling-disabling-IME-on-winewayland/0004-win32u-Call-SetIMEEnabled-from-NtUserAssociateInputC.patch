@@ -1,17 +1,18 @@
-From e151b2656cf5afdbb43e4f9ac2d3fc703aee93a2 Mon Sep 17 00:00:00 2001
+From 9f13caecc771a061be1efe2561f6e2b14905bd51 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Tue, 3 Feb 2026 20:54:24 +0100
-Subject: [PATCH] win32u: Call SetIMEEnabled from NtUserAssociateInputContext.
+Subject: [PATCH 4/4] win32u: Call SetIMEEnabled from
+ NtUserAssociateInputContext.
 
 ---
  dlls/win32u/imm.c | 3 +++
  1 file changed, 3 insertions(+)
 
 diff --git a/dlls/win32u/imm.c b/dlls/win32u/imm.c
-index 3337f66e291..07b41959442 100644
+index f585b80a383..8e3258cd423 100644
 --- a/dlls/win32u/imm.c
 +++ b/dlls/win32u/imm.c
-@@ -221,6 +221,9 @@ UINT WINAPI NtUserAssociateInputContext( HWND hwnd, HIMC ctx, ULONG flags )
+@@ -220,6 +220,9 @@ UINT WINAPI NtUserAssociateInputContext( HWND hwnd, HIMC ctx, ULONG flags )
      }
  
      release_win_ptr( win );
@@ -22,5 +23,5 @@ index 3337f66e291..07b41959442 100644
  }
  
 -- 
-GitLab
+2.53.0
 
