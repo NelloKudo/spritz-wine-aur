@@ -1,4 +1,4 @@
-From 49833d441be6bb798067ccae9253bbaf9a5b6564 Mon Sep 17 00:00:00 2001
+From 7f135b76ff44cda835ba7d6f0bb738218f08e5ea Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 14 Dec 2022 21:21:50 +0100
 Subject: [PATCH 01/10] HACK: winex11.drv: Workaround focusing out of exclusive

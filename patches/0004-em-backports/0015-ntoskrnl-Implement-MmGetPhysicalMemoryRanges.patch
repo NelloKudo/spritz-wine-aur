@@ -1,4 +1,4 @@
-From f971ed38f55db56e154a3439098f65d314729186 Mon Sep 17 00:00:00 2001
+From c15cab44bdff41ac44b5d6ebe5823add5f1d3fea Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 21:56:28 -0400
@@ -10,10 +10,10 @@ probably can be moved to dll attach
  1 file changed, 11 insertions(+), 5 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 5c5d24e4568..198bf16f81a 100644
+index 143ab7a7154..6186aa44ea3 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -3112,12 +3112,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
+@@ -3137,12 +3137,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
  
  PHYSICAL_MEMORY_RANGE *WINAPI MmGetPhysicalMemoryRanges(void)
  {

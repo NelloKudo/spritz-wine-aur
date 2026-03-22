@@ -1,4 +1,4 @@
-From dc10088f6440ed7e85e2cbf4f943f5d73f693c92 Mon Sep 17 00:00:00 2001
+From e62e45bfd3cbef3795330244eb27d295ae7b4598 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 14 Aug 2025 14:18:26 +0200
 Subject: [PATCH 2/8] HACK: ws2_32: Block first internet connection for some

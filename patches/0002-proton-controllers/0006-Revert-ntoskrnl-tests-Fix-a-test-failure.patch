@@ -1,4 +1,4 @@
-From 3d2c0e1c37466e240a1f56c4b0caeaf197a7eb1f Mon Sep 17 00:00:00 2001
+From 85e2e58714b5812e94f7816118e72dc5224bfe63 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Thu, 27 Jul 2023 09:23:05 +0200
 Subject: [PATCH 6/7] Revert "ntoskrnl/tests: Fix a test failure."

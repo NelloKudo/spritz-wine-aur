@@ -1,4 +1,4 @@
-From b050c98a632c01fb31d4c0ba86d0a359314e6f75 Mon Sep 17 00:00:00 2001
+From 6bf081fde34c4a49db31bf5726e9f5cda290ba82 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Sun, 15 Feb 2026 00:15:26 +0100
 Subject: [PATCH 08/10] wdfldr.sys: Semi-implement WdfVersionBind.

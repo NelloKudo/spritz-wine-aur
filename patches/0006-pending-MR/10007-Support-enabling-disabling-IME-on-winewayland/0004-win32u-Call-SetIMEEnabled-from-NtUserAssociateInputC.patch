@@ -1,4 +1,4 @@
-From 9f13caecc771a061be1efe2561f6e2b14905bd51 Mon Sep 17 00:00:00 2001
+From 2a9c36000b21a4beacfc1b427863786b2f568f0d Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Tue, 3 Feb 2026 20:54:24 +0100
 Subject: [PATCH 4/4] win32u: Call SetIMEEnabled from

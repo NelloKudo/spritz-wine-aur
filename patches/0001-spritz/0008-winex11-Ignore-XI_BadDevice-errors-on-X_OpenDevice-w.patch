@@ -1,4 +1,4 @@
-From 59d0dec4ce60f0bf15e840b1fbf1f72380fe55d3 Mon Sep 17 00:00:00 2001
+From f08ade3a318ad992b5311c21e792ea898885650e Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Sat, 8 Feb 2025 21:45:00 -0800
 Subject: [PATCH 8/8] winex11: Ignore XI_BadDevice errors on X_OpenDevice when

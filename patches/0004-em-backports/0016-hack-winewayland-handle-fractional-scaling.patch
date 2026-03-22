@@ -1,4 +1,4 @@
-From bdb37f0c24e63a00cb04872f8f0cd2cdb4269be5 Mon Sep 17 00:00:00 2001
+From b4ec981ccd8f6730fc406b4355befbcea15f9736 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 6 May 2025 09:06:03 -0400
@@ -227,7 +227,7 @@ index 2f8275ddb52..04d6b0a095e 100644
      {
          wp_viewport_destroy(surface->wp_viewport);
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index ad41a1b474e..72011d1361f 100644
+index 3b0c300a1f6..1006fb7cd8d 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
 @@ -38,6 +38,7 @@

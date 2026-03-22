@@ -1,4 +1,4 @@
-From 31ce086eb901b5dee75974719a85c3436ec0e142 Mon Sep 17 00:00:00 2001
+From 5daf62ee23c8f56183c7550389a601f0415c01ae Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Tue, 3 Feb 2026 18:30:01 +0100
 Subject: [PATCH 3/4] imm32/tests: Test which IME receives ImeSetActiveContext
@@ -9,10 +9,10 @@ Subject: [PATCH 3/4] imm32/tests: Test which IME receives ImeSetActiveContext
  1 file changed, 21 insertions(+)
 
 diff --git a/dlls/imm32/tests/imm32.c b/dlls/imm32/tests/imm32.c
-index 5e6d847fed2..229dcfd1c1e 100644
+index c4d1404f3ea..03fbff21533 100644
 --- a/dlls/imm32/tests/imm32.c
 +++ b/dlls/imm32/tests/imm32.c
-@@ -5584,6 +5584,27 @@ static void test_ImmSetActiveContext(void)
+@@ -5582,6 +5582,27 @@ static void test_ImmSetActiveContext(void)
  
      ok_ret( 1, ImmActivateLayout( hkl ) );
      ok_ret( 1, ImmLoadIME( hkl ) );

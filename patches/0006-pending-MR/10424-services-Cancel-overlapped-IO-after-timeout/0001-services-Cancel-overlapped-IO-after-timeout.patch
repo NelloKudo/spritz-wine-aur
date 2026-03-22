@@ -1,0 +1,48 @@
+From 08a90ae03acf82fe56129fb63598eac8174f2cbd Mon Sep 17 00:00:00 2001
+From: Yuxuan Shui <yshui@codeweavers.com>
+Date: Mon, 23 Mar 2026 03:40:42 +0000
+Subject: [PATCH] services: Cancel overlapped IO after timeout.
+
+Though WaitForSingleObject timed out, the IO operation is still running in the background. After the
+function process_send_command returns, the OVERLAPPED object referenced by this IO operation becomes
+invalid. Later, when this IO finally completes, server_select will use invalid stack memory.
+---
+ programs/services/rpc.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/programs/services/rpc.c b/programs/services/rpc.c
+index 2f4d4a5c26c..2b48bb78be5 100644
+--- a/programs/services/rpc.c
++++ b/programs/services/rpc.c
+@@ -1223,16 +1223,22 @@ static BOOL process_send_command(struct process_entry *process, const void *data
+         if (ret == WAIT_TIMEOUT)
+         {
+             WINE_ERR("receiving command result timed out\n");
+-            *result = ERROR_SERVICE_REQUEST_TIMEOUT;
+-            return FALSE;
++            if (!CancelIoEx(process->control_pipe, &overlapped))
++                WINE_ERR("Failed to cancel IO, %#lx\n", GetLastError());
+         }
+-        r = GetOverlappedResult(process->control_pipe, &overlapped, &count, FALSE);
++        r = GetOverlappedResult(process->control_pipe, &overlapped, &count, TRUE);
+     }
+     if (!r || count != sizeof *result)
+     {
+-        WINE_ERR("service protocol error - failed to read pipe "
+-            "r = %d  count = %ld!\n", r, count);
+-        *result = (!r ? GetLastError() : ERROR_READ_FAULT);
++        DWORD error = GetLastError();
++        if (error == ERROR_OPERATION_ABORTED)
++            *result = ERROR_SERVICE_REQUEST_TIMEOUT;
++        else
++        {
++            WINE_ERR("service protocol error - failed to read pipe "
++                "r = %d  count = %ld!\n", r, count);
++            *result = (!r ? GetLastError() : ERROR_READ_FAULT);
++        }
+         return FALSE;
+     }
+ 
+-- 
+2.53.0
+

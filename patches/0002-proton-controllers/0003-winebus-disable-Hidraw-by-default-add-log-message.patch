@@ -1,4 +1,4 @@
-From a470bff79c2e0009f5d8fcf14f749b67ef4af04d Mon Sep 17 00:00:00 2001
+From 5cea3d0df1708679a2de90c62b7eff5637260342 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 17:07:35 +0200
 Subject: [PATCH 3/7] winebus: disable Hidraw by default, add log message

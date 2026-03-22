@@ -1,4 +1,4 @@
-From f38017e9eedf279114418fb2afb45e6140ced2e5 Mon Sep 17 00:00:00 2001
+From b7fe5fd0f93be5d459974aab60fa6ea401681de1 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Wed, 10 Sep 2025 01:12:08 +0200
 Subject: [PATCH 1/8] winediag: change logging and redirect to Spritz

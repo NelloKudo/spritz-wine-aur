@@ -1,4 +1,4 @@
-From 5544eb0b795d8455dce9f148e465e07312facc22 Mon Sep 17 00:00:00 2001
+From 6a7d1d7bc68f2cddf6097f95cd306b0beb29d7f0 Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Sat, 28 Dec 2024 06:45:10 -0800
 Subject: [PATCH 04/10] ntdll: Never use CLOCK_REALTIME_COARSE.

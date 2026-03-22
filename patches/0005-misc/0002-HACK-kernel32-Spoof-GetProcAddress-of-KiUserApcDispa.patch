@@ -1,4 +1,4 @@
-From 4764781cbe45a2c61cbbd23246efbc64e95c8d8e Mon Sep 17 00:00:00 2001
+From 34b91cb80f2af261520459a35602346ef4d4a3f9 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Tue, 20 Jan 2026 16:33:26 +0100
 Subject: [PATCH 02/10] HACK: kernel32: Spoof GetProcAddress of

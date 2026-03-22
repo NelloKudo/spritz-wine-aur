@@ -1,4 +1,4 @@
-From d901dfd1345ee2c28251ea8f6f35fa56b50da570 Mon Sep 17 00:00:00 2001
+From ca95b0f91adfcbd8371fb82f29538e3f1678f582 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 01:06:02 -0400
@@ -10,10 +10,10 @@ Subject: [PATCH 11/22] ntoskrnl: Implement PsGetContextThread.
  2 files changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 85698381877..4de34f418fd 100644
+index 4ba284c9262..2f913eafc2c 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2748,6 +2748,23 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
+@@ -2773,6 +2773,23 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
      return thread->kthread.id.UniqueProcess;
  }
  
@@ -38,7 +38,7 @@ index 85698381877..4de34f418fd 100644
   *           KeInsertQueue   (NTOSKRNL.EXE.@)
   */
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 1993ee76422..71701e578d1 100644
+index a538c7ed5f1..3b5fbf02f85 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -910,7 +910,7 @@

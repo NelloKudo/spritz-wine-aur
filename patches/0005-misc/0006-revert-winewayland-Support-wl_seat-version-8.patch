@@ -1,4 +1,4 @@
-From 150c5de23db825855dec47dcd42dd3bbb178a1d9 Mon Sep 17 00:00:00 2001
+From 18ff904984a0d06fba7c29f290fcf88be086d94c Mon Sep 17 00:00:00 2001
 From: winebuild <wine@build.dev>
 Date: Sat, 24 Jan 2026 23:21:02 +0300
 Subject: [PATCH 06/10] revert: winewayland: Support wl_seat version 8.

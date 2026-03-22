@@ -1,4 +1,4 @@
-From 2098b13c5ec0be446332a6073814cf3841272f88 Mon Sep 17 00:00:00 2001
+From a63ff82617243c544cd8ce96788aa8322674513a Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:53:06 -0400
@@ -11,10 +11,10 @@ Subject: [PATCH 05/22] ntoskrnl: Add stub for
  2 files changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index bad042bcee6..86ffbed6f1f 100644
+index 6bcff155ae5..db500f8b6b8 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2869,6 +2869,16 @@ BOOL WINAPI KeRegisterBugCheckCallback(void *record, void *routine,
+@@ -2894,6 +2894,16 @@ BOOL WINAPI KeRegisterBugCheckCallback(void *record, void *routine,
      return TRUE;
  }
  
@@ -32,7 +32,7 @@ index bad042bcee6..86ffbed6f1f 100644
   *           IoRegisterFileSystem   (NTOSKRNL.EXE.@)
   */
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 4b89b38f709..21d894c8d3f 100644
+index d316ca36466..003a18e597d 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -631,7 +631,7 @@

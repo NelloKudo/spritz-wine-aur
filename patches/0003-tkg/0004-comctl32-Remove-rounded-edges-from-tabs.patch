@@ -1,4 +1,4 @@
-From 334b72d83d3a2b935e088103e25a9914b8975484 Mon Sep 17 00:00:00 2001
+From 95f5e40235ead2d8aa0691ff7bfea44b5c0e3d0f Mon Sep 17 00:00:00 2001
 From: Joshua Ashton <joshua@froggi.es>
 Date: Thu, 16 Jul 2020 10:18:14 +0100
 Subject: [PATCH 4/8] comctl32: Remove rounded edges from tabs
@@ -9,7 +9,7 @@ Signed-off-by: Joshua Ashton <joshua@froggi.es>
  1 file changed, 16 insertions(+), 33 deletions(-)
 
 diff --git a/dlls/comctl32/tab.c b/dlls/comctl32/tab.c
-index 3a964c41608..35611bca59e 100644
+index 352c4bf861d..f1612bf8d4c 100644
 --- a/dlls/comctl32/tab.c
 +++ b/dlls/comctl32/tab.c
 @@ -128,7 +128,6 @@ typedef struct
@@ -20,7 +20,7 @@ index 3a964c41608..35611bca59e 100644
  #define DISPLAY_AREA_PADDINGX   2
  #define DISPLAY_AREA_PADDINGY   2
  #define CONTROL_BORDER_SIZEX    2
-@@ -2129,21 +2128,17 @@ static void TAB_DrawItem(const TAB_INFO *infoPtr, HDC  hdc, INT  iItem)
+@@ -2135,21 +2134,17 @@ static void TAB_DrawItem(const TAB_INFO *infoPtr, HDC  hdc, INT  iItem)
  
  	  /* Now erase the top corner and draw diagonal edge */
  	  SetBkColor(hdc, corner);
@@ -46,7 +46,7 @@ index 3a964c41608..35611bca59e 100644
  	  DrawEdge(hdc, &r1, EDGE_RAISED, BF_SOFT|BF_DIAGONAL_ENDBOTTOMLEFT);
  
  	  if ((iItem == infoPtr->iSelected) && (selectedRect.top == 0)) {
-@@ -2170,19 +2165,15 @@ static void TAB_DrawItem(const TAB_INFO *infoPtr, HDC  hdc, INT  iItem)
+@@ -2176,19 +2171,15 @@ static void TAB_DrawItem(const TAB_INFO *infoPtr, HDC  hdc, INT  iItem)
  	  SetBkColor(hdc, corner);
  	  r1.left = r.left;
  	  r1.top = r.top;
@@ -70,7 +70,7 @@ index 3a964c41608..35611bca59e 100644
  	  DrawEdge(hdc, &r1, EDGE_SUNKEN, BF_DIAGONAL_ENDTOPLEFT);
          }
        }
-@@ -2220,21 +2211,17 @@ static void TAB_DrawItem(const TAB_INFO *infoPtr, HDC  hdc, INT  iItem)
+@@ -2226,21 +2217,17 @@ static void TAB_DrawItem(const TAB_INFO *infoPtr, HDC  hdc, INT  iItem)
  
  	  /* Now erase the righthand corner and draw diagonal edge */
  	  SetBkColor(hdc, corner);
@@ -96,7 +96,7 @@ index 3a964c41608..35611bca59e 100644
  	  DrawEdge(hdc, &r1, EDGE_RAISED, BF_SOFT|BF_DIAGONAL_ENDTOPLEFT);
  
  	  if (iItem == infoPtr->iSelected)
-@@ -2272,21 +2259,17 @@ static void TAB_DrawItem(const TAB_INFO *infoPtr, HDC  hdc, INT  iItem)
+@@ -2278,21 +2265,17 @@ static void TAB_DrawItem(const TAB_INFO *infoPtr, HDC  hdc, INT  iItem)
  
  	  /* Now erase the righthand corner and draw diagonal edge */
  	  SetBkColor(hdc, corner);

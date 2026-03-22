@@ -1,4 +1,4 @@
-From 674b672787f537050713d9c0bd6737d2f67d1528 Mon Sep 17 00:00:00 2001
+From d7f088da6ef5a2c9fd7426d3cee5efc1752756fa Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:39:47 -0400
@@ -11,10 +11,10 @@ Subject: [PATCH 13/22] fixup! ntoskrnl: SeLocateProcessImageName.
  3 files changed, 62 insertions(+), 21 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index ef89e2c0157..4c833e9b293 100644
+index aa343f32564..a7d3d15fac1 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2488,7 +2488,7 @@ static void *create_process_object( HANDLE handle )
+@@ -2513,7 +2513,7 @@ static void *create_process_object( HANDLE handle )
      HANDLE token;
      PEPROCESS process;
      ANSI_STRING fullImageNameA;
@@ -23,7 +23,7 @@ index ef89e2c0157..4c833e9b293 100644
  
      if (!(process = alloc_kernel_object( PsProcessType, handle, sizeof(*process), 0 ))) return NULL;
  
-@@ -2499,15 +2499,12 @@ static void *create_process_object( HANDLE handle )
+@@ -2524,15 +2524,12 @@ static void *create_process_object( HANDLE handle )
      NtQueryInformationProcess( handle, ProcessTimes, &process->times, sizeof(process->times), NULL );
  
      /* get full image name */
@@ -45,7 +45,7 @@ index ef89e2c0157..4c833e9b293 100644
      if (!fullImageNameA.Buffer) return NULL;
      /* generate short name */
      for (p = fullImageNameA.Buffer + fullImageNameA.Length - 1; p >= fullImageNameA.Buffer; p--)
-@@ -2520,6 +2517,7 @@ static void *create_process_object( HANDLE handle )
+@@ -2545,6 +2542,7 @@ static void *create_process_object( HANDLE handle )
      }
      memcpy(process->imageName, p, min(fullImageNameA.Buffer + fullImageNameA.Length - p, sizeof(process->imageName)));
      RtlFreeAnsiString(&fullImageNameA);
@@ -53,7 +53,7 @@ index ef89e2c0157..4c833e9b293 100644
  
      IsWow64Process( handle, &process->wow64 );
  
-@@ -2533,8 +2531,11 @@ static void *create_process_object( HANDLE handle )
+@@ -2558,8 +2556,11 @@ static void *create_process_object( HANDLE handle )
  void release_process_object(void *obj)
  {
      PEPROCESS process = obj;
@@ -67,7 +67,7 @@ index ef89e2c0157..4c833e9b293 100644
  
      SERVER_START_REQ( release_kernel_object )
      {
-@@ -2757,11 +2758,10 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
+@@ -2782,11 +2783,10 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
   */
  NTSTATUS WINAPI PsGetContextThread(PETHREAD thread, CONTEXT *context)
  {
@@ -81,7 +81,7 @@ index ef89e2c0157..4c833e9b293 100644
          return STATUS_NOT_FOUND;
  
      status = NtGetContextThread(handle, context);
-@@ -3110,6 +3110,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
+@@ -3135,6 +3135,18 @@ PHYSICAL_ADDRESS WINAPI MmGetPhysicalAddress(void *virtual_address)
      return ret;
  }
  
@@ -100,7 +100,7 @@ index ef89e2c0157..4c833e9b293 100644
  /***********************************************************************
   *           MmGetVirtualForPhysical   (NTOSKRNL.EXE.@)
   */
-@@ -4481,18 +4493,42 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
+@@ -4553,18 +4565,42 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
   */
  NTSTATUS WINAPI SeLocateProcessImageName(PEPROCESS process, UNICODE_STRING **image_name)
  {
@@ -147,7 +147,7 @@ index ef89e2c0157..4c833e9b293 100644
  }
  
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 71701e578d1..bbd4b91635c 100644
+index 3b5fbf02f85..97e1925b8f8 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -728,7 +728,7 @@

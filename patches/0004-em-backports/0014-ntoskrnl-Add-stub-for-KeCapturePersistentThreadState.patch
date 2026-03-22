@@ -1,4 +1,4 @@
-From 44007152660f15b0911bb93e67fb0ff728d64d0b Mon Sep 17 00:00:00 2001
+From c356b78467608aa6d7d7bb12721662346bb6199c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:46:14 -0400
@@ -10,10 +10,10 @@ Subject: [PATCH 14/22] ntoskrnl: Add stub for KeCapturePersistentThreadState.
  2 files changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 4c833e9b293..5c5d24e4568 100644
+index a7d3d15fac1..143ab7a7154 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -4866,6 +4866,14 @@ NTSTATUS WINAPI KdChangeOption(ULONG option, ULONG in_size, PVOID in_buffer,
+@@ -4938,6 +4938,14 @@ NTSTATUS WINAPI KdChangeOption(ULONG option, ULONG in_size, PVOID in_buffer,
      return STATUS_DEBUGGER_INACTIVE;
  }
  
@@ -29,7 +29,7 @@ index 4c833e9b293..5c5d24e4568 100644
  {
      FIXME(": stub.\n");
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index bbd4b91635c..26dab1cd571 100644
+index 97e1925b8f8..daab993aa1f 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -550,7 +550,7 @@

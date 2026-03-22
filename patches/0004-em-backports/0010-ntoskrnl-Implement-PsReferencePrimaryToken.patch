@@ -1,4 +1,4 @@
-From 181de41382f06ea1701e441c3cd68af14577e2dc Mon Sep 17 00:00:00 2001
+From 37ce9053f036cf27db88fa503fed6279ce2b3e21 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 00:34:32 -0400
@@ -11,10 +11,10 @@ Subject: [PATCH 10/22] ntoskrnl: Implement PsReferencePrimaryToken.
  3 files changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 0198f12dec6..85698381877 100644
+index e2f42f3b9ce..4ba284c9262 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2484,6 +2484,7 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
+@@ -2509,6 +2509,7 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
  static void *create_process_object( HANDLE handle )
  {
      ULONG len;
@@ -22,7 +22,7 @@ index 0198f12dec6..85698381877 100644
      PEPROCESS process;
      ANSI_STRING imageNameA;
      UNICODE_STRING imageNameW, fullImageName;
-@@ -2516,6 +2517,10 @@ static void *create_process_object( HANDLE handle )
+@@ -2541,6 +2542,10 @@ static void *create_process_object( HANDLE handle )
                                 sizeof(fullImageName) + fullImageName.MaximumLength, NULL );
      process->fullImageName = fullImageName;
  
@@ -33,7 +33,7 @@ index 0198f12dec6..85698381877 100644
      IsWow64Process( handle, &process->wow64 );
  
      return process;
-@@ -2525,6 +2530,7 @@ void release_process_object(void *obj)
+@@ -2550,6 +2555,7 @@ void release_process_object(void *obj)
  {
      PEPROCESS process = obj;
      ExFreePool(process->fullImageName.Buffer);
@@ -41,7 +41,7 @@ index 0198f12dec6..85698381877 100644
  
      SERVER_START_REQ( release_kernel_object )
      {
-@@ -2620,6 +2626,16 @@ const char *WINAPI PsGetProcessImageFileName( PEPROCESS process )
+@@ -2645,6 +2651,16 @@ const char *WINAPI PsGetProcessImageFileName( PEPROCESS process )
      return process->imageName;
  }
  
@@ -59,7 +59,7 @@ index 0198f12dec6..85698381877 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 112e1cb7612..1993ee76422 100644
+index f535fa12c6e..a538c7ed5f1 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -960,7 +960,7 @@

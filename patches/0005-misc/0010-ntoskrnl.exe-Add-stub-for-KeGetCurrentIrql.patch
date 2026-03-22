@@ -1,4 +1,4 @@
-From 0a2b1a52701843c8a2c6183b2a027a253dea2943 Mon Sep 17 00:00:00 2001
+From 1b32a21f85aecfa3a0b6002af28c6cda3437fabf Mon Sep 17 00:00:00 2001
 From: Quitting <quitthefake@gmail.com>
 Date: Sun, 15 Feb 2026 00:29:46 +0100
 Subject: [PATCH 10/10] ntoskrnl.exe: Add stub for KeGetCurrentIrql.
@@ -9,7 +9,7 @@ Subject: [PATCH 10/10] ntoskrnl.exe: Add stub for KeGetCurrentIrql.
  2 files changed, 15 insertions(+)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 198bf16f81a..7fa61d700f4 100644
+index 6186aa44ea3..105056192a5 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
 @@ -53,6 +53,11 @@ typedef struct _KSERVICE_TABLE_DESCRIPTOR
@@ -24,7 +24,7 @@ index 198bf16f81a..7fa61d700f4 100644
  #define MAX_SERVICE_NAME 260
  
  static TP_POOL *dpc_call_tp;
-@@ -2702,6 +2707,15 @@ PRKTHREAD WINAPI KeGetCurrentThread(void)
+@@ -2727,6 +2732,15 @@ PRKTHREAD WINAPI KeGetCurrentThread(void)
      return thread;
  }
  
@@ -41,7 +41,7 @@ index 198bf16f81a..7fa61d700f4 100644
   *           PsLookupThreadByThreadId   (NTOSKRNL.EXE.@)
   */
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 26dab1cd571..7214e51d74c 100644
+index daab993aa1f..a331ac06b2b 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -568,6 +568,7 @@

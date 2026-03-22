@@ -1,4 +1,4 @@
-From 613b6b2ad80cf6ed25747fc0c06086484bf39a65 Mon Sep 17 00:00:00 2001
+From 4d4da589b920b75c035ce6084bdd78ac549a460d Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 23:32:46 -0400
@@ -10,10 +10,10 @@ Subject: [PATCH 09/22] ntoskrnl: Implement SeLocateProcessImageName.
  2 files changed, 47 insertions(+), 7 deletions(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index a00088c03bd..0198f12dec6 100644
+index 5f676f2b15c..e2f42f3b9ce 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2483,9 +2483,10 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
+@@ -2508,9 +2508,10 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
  
  static void *create_process_object( HANDLE handle )
  {
@@ -25,7 +25,7 @@ index a00088c03bd..0198f12dec6 100644
  
      if (!(process = alloc_kernel_object( PsProcessType, handle, sizeof(*process), 0 ))) return NULL;
  
-@@ -2495,24 +2496,52 @@ static void *create_process_object( HANDLE handle )
+@@ -2520,24 +2521,52 @@ static void *create_process_object( HANDLE handle )
      NtQueryInformationProcess( handle, ProcessSessionInformation, &process->session_id, sizeof(process->session_id), NULL );
      NtQueryInformationProcess( handle, ProcessTimes, &process->times, sizeof(process->times), NULL );
  
@@ -80,7 +80,7 @@ index a00088c03bd..0198f12dec6 100644
  };
  
  POBJECT_TYPE PsProcessType = &process_type;
-@@ -4415,9 +4444,19 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
+@@ -4487,9 +4516,19 @@ BOOLEAN WINAPI SePrivilegeCheck(PRIVILEGE_SET *privileges, SECURITY_SUBJECT_CONT
   */
  NTSTATUS WINAPI SeLocateProcessImageName(PEPROCESS process, UNICODE_STRING **image_name)
  {

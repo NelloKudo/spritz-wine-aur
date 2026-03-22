@@ -1,4 +1,4 @@
-From 9fe3c35b6484c7b9c78fbc2f15bc6870b5fa9d9d Mon Sep 17 00:00:00 2001
+From eb183d7312844d8b7f193f85e61139ad57c10c65 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Sat, 12 Jul 2025 14:38:28 +0200
 Subject: [PATCH 6/8] HACK: winex11: make WM focus the window by default

@@ -1,4 +1,4 @@
-From ae1fd093bd7af48281d732c89878273653d12655 Mon Sep 17 00:00:00 2001
+From d1755ad7b8f71b2a74d3e6b6487fbd7ed94b66b8 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:04:12 -0400
@@ -11,10 +11,10 @@ Subject: [PATCH 02/22] ntoskrnl: Implement PsGetProcessCreateTimeQuadPart.
  3 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 77ba5aa0f2f..b9e85eb1797 100644
+index b2eff45a479..6a062347a54 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2491,6 +2491,7 @@ static void *create_process_object( HANDLE handle )
+@@ -2516,6 +2516,7 @@ static void *create_process_object( HANDLE handle )
      process->header.WaitListHead.Blink = INVALID_HANDLE_VALUE; /* mark as kernel object */
      NtQueryInformationProcess( handle, ProcessBasicInformation, &process->info, sizeof(process->info), NULL );
      NtQueryInformationProcess( handle, ProcessSessionInformation, &process->session_id, sizeof(process->session_id), NULL );
@@ -22,7 +22,7 @@ index 77ba5aa0f2f..b9e85eb1797 100644
      IsWow64Process( handle, &process->wow64 );
  
      return process;
-@@ -2562,6 +2563,15 @@ ULONG WINAPI PsGetProcessSessionId( PEPROCESS process )
+@@ -2587,6 +2588,15 @@ ULONG WINAPI PsGetProcessSessionId( PEPROCESS process )
      return process->session_id;
  }
  
@@ -39,7 +39,7 @@ index 77ba5aa0f2f..b9e85eb1797 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 51428453091..599388ee4c2 100644
+index 21c5735332a..8fadc6d26d5 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 @@ -922,7 +922,7 @@
