@@ -1,43 +1,34 @@
-FROM registry.gitlab.steamos.cloud/proton/sniper/sdk:3.0.20250519.130773-0 AS main-deps
-
-ENV DEBIAN_FRONTEND=noninteractive \
-    PATH="/usr/lib/gcc-14/bin:$PATH"
-
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/lib/gcc-14/bin/gcc 90 \
-    --slave /usr/bin/g++ g++ /usr/lib/gcc-14/bin/g++ \
-    --slave /usr/bin/gcov gcov /usr/lib/gcc-14/bin/gcov
+FROM registry.gitlab.steamos.cloud/proton/steamrt4/sdk/x86_64:4.0.20260331.220802-0 AS main-deps
 
 FROM main-deps AS manual-deps
 
 ENV FFMPEG_VERSION="7.1.1" \
     LIBXKBCOMMON_VERSION="1.13.1" \
-    LIBXML2_VERSION="2.15.2" \
+    LIBXML2_VERSION="2.15.3" \
     GSTREAMER_VERSION="1.26.5" \
-    LLVM_MINGW_VERSION="20250402" \
+    LLVM_MINGW_VERSION="20260407" \
     XZ_VERSION="5.8.3" \
     LIBUNWIND_VERSION="1.8.3" \
-    GCC_MINGW_VERSION="14.2.0-1" \
+    GCC_MINGW_VERSION="15.2.0-2" \
     LIBGLVND_VERSION="1.7.0" \
-    MESON_VERSION="1.10.2" \
-    NINJA_VERSION="1.13.0" \
     RUSTUP_VERSION="1.29.0" \
-    RUST_VERSION="1.94.1" \
+    RUST_VERSION="1.95.0" \
     WAYLAND_VERSION="1.25.0" \
     PATH="/usr/local/llvm-mingw/bin:$PATH"
 
 RUN wget -O llvm-mingw-${LLVM_MINGW_VERSION}.tar.xz \
-    https://github.com/mstorsjo/llvm-mingw/releases/download/${LLVM_MINGW_VERSION}/llvm-mingw-${LLVM_MINGW_VERSION}-msvcrt-ubuntu-20.04-x86_64.tar.xz && \
+    https://github.com/mstorsjo/llvm-mingw/releases/download/${LLVM_MINGW_VERSION}/llvm-mingw-${LLVM_MINGW_VERSION}-msvcrt-ubuntu-22.04-x86_64.tar.xz && \
     tar -xf llvm-mingw-${LLVM_MINGW_VERSION}.tar.xz -C /usr/local && \
     rm -rf /usr/local/llvm-mingw && \
-    mv /usr/local/llvm-mingw-${LLVM_MINGW_VERSION}-msvcrt-ubuntu-20.04-x86_64 /usr/local/llvm-mingw
+    mv /usr/local/llvm-mingw-${LLVM_MINGW_VERSION}-msvcrt-ubuntu-22.04-x86_64 /usr/local/llvm-mingw
 
 WORKDIR /build
 
 RUN apt-get -y update && \
     apt-get -y install python3-pip libfaad-dev libfaad-dev:i386 \
-        libexpat1-dev libexpat1-dev:i386 libffi-dev libffi-dev:i386 && \
-    pip3 install --upgrade pip && \
-    pip3 install --upgrade meson==${MESON_VERSION} ninja==${NINJA_VERSION}
+        libexpat1-dev libexpat1-dev:i386 libffi-dev libffi-dev:i386 \
+        gawk libkrb5-dev libkrb5-dev:i386 libpcap0.8 libpcap0.8-dev \
+        libpcap0.8:i386 libpcap0.8-dev:i386 libssl-dev libssl-dev:i386
 
 RUN wget -O rustup-init.sh https://raw.githubusercontent.com/rust-lang/rustup/${RUSTUP_VERSION}/rustup-init.sh && \
     chmod +x rustup-init.sh && \
@@ -78,6 +69,33 @@ RUN wget -O wayland.tar.xz \
     meson install -C build_i386 && \
     rm -rf build_i386
 
+RUN wget -O libxml2.tar.gz https://github.com/GNOME/libxml2/archive/refs/tags/v${LIBXML2_VERSION}.tar.gz && \
+    tar -xf libxml2.tar.gz && \
+    cd libxml2-${LIBXML2_VERSION} && \
+    export LIBRARY_PATH="usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LIBRARY_PATH:-}" && \
+    export LD_LIBRARY_PATH="usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LD_LIBRARY_PATH:-}" && \
+    # 64-bit
+    export PKG_CONFIG_LIBDIR="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig" && \
+    export PKG_CONFIG_PATH="${PKG_CONFIG_LIBDIR}" && \
+    CFLAGS="-fPIC -static-libgcc" CXXFLAGS="-fPIC -static-libgcc -static-libstdc++" LDFLAGS="-static-libgcc -static-libstdc++" \
+    ./autogen.sh --prefix=/usr/local/x86_64 --libdir=/usr/local/x86_64/lib/x86_64-linux-gnu \
+    --enable-static --disable-shared \
+    --without-python --without-lzma --without-zlib \
+    --host=x86_64-linux-gnu && \
+    make -j$(nproc) && \
+    make install && \
+    make distclean && \
+    # 32-bit
+    export PKG_CONFIG_LIBDIR="/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/i386/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig" && \
+    export PKG_CONFIG_PATH="${PKG_CONFIG_LIBDIR}" && \
+    CFLAGS="-fPIC -m32 -static-libgcc" CXXFLAGS="-fPIC -m32 -static-libgcc -static-libstdc++" LDFLAGS="-m32 -static-libgcc -static-libstdc++" \
+    ./autogen.sh --prefix=/usr/local/i386 --libdir=/usr/local/i386/lib/i386-linux-gnu \
+    --enable-static --disable-shared \
+    --without-python --without-lzma --without-zlib \
+    --host=i686-linux-gnu && \
+    make -j$(nproc) && \
+    make install
+
 RUN wget -O libxkbcommon.tar.gz https://github.com/xkbcommon/libxkbcommon/archive/refs/tags/xkbcommon-${LIBXKBCOMMON_VERSION}.tar.gz && \
     tar -xf libxkbcommon.tar.gz && \
     cd libxkbcommon-xkbcommon-${LIBXKBCOMMON_VERSION} && \
@@ -108,33 +126,6 @@ RUN wget -O libxkbcommon.tar.gz https://github.com/xkbcommon/libxkbcommon/archiv
     meson compile -C "build_i386" xkbcommon:static_library && \
     meson compile -C "build_i386" xkbregistry:static_library && \
     meson install -C "build_i386" --no-rebuild --tags devel
-
-RUN wget -O libxml2.tar.gz https://github.com/GNOME/libxml2/archive/refs/tags/v${LIBXML2_VERSION}.tar.gz && \
-    tar -xf libxml2.tar.gz && \
-    cd libxml2-${LIBXML2_VERSION} && \
-    export LIBRARY_PATH="usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LIBRARY_PATH:-}" && \
-    export LD_LIBRARY_PATH="usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LD_LIBRARY_PATH:-}" && \
-    # 64-bit
-    export PKG_CONFIG_LIBDIR="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig" && \
-    export PKG_CONFIG_PATH="${PKG_CONFIG_LIBDIR}" && \
-    CFLAGS="-fPIC -static-libgcc" CXXFLAGS="-fPIC -static-libgcc -static-libstdc++" LDFLAGS="-static-libgcc -static-libstdc++" \
-    ./autogen.sh --prefix=/usr/local/x86_64 --libdir=/usr/local/x86_64/lib/x86_64-linux-gnu \
-    --enable-static --disable-shared \
-    --without-python --without-lzma --without-zlib \
-    --host=x86_64-linux-gnu && \
-    make -j$(nproc) && \
-    make install && \
-    make distclean && \
-    # 32-bit
-    export PKG_CONFIG_LIBDIR="/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/i386/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig" && \
-    export PKG_CONFIG_PATH="${PKG_CONFIG_LIBDIR}" && \
-    CFLAGS="-fPIC -m32 -static-libgcc" CXXFLAGS="-fPIC -m32 -static-libgcc -static-libstdc++" LDFLAGS="-m32 -static-libgcc -static-libstdc++" \
-    ./autogen.sh --prefix=/usr/local/i386 --libdir=/usr/local/i386/lib/i386-linux-gnu \
-    --enable-static --disable-shared \
-    --without-python --without-lzma --without-zlib \
-    --host=i686-linux-gnu && \
-    make -j$(nproc) && \
-    make install
 
 RUN wget -O gstreamer.tar.gz https://github.com/GStreamer/gstreamer/archive/refs/tags/${GSTREAMER_VERSION}.tar.gz && \
     tar -xf gstreamer.tar.gz && \
@@ -294,10 +285,7 @@ RUN wget -O gcc-mingw.tar.xz \
 RUN wget -O /usr/include/linux/ntsync.h  \
     https://raw.githubusercontent.com/zen-kernel/zen-kernel/refs/tags/v6.17-zen1/include/uapi/linux/ntsync.h
 
-RUN apt-get -y update && \
-    apt-get -y install gawk libkrb5-dev libkrb5-dev:i386 libpcap0.8 libpcap0.8-dev \
-        libpcap0.8:i386 libpcap0.8-dev:i386 libfaad-dev libfaad-dev:i386 && \
-    apt-get clean && apt-get autoclean && \
+RUN apt-get clean && apt-get autoclean && \
     rm -rf /build/* /var/lib/apt/lists/*
 
 FROM manual-deps AS temp-layer

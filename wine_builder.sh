@@ -157,10 +157,10 @@ build_wine() {
 
     # Allow Wine-Wayland to work in Steam Linux Runtime
     XKBCOMMON_CFLAGS="$(pkg-config --static --cflags xkbcommon)"
-    XKBCOMMON_LIBS="$(pkg-config --static --libs xkbcommon | sed -e 's| -l| -l:lib|').a"
+    XKBCOMMON_LIBS="$(pkg-config --static --libs xkbcommon | sed -E 's/-l([^ ]+)/-l:lib\1.a/g')"
     export XKBCOMMON_CFLAGS XKBCOMMON_LIBS
     LIBXML2_CFLAGS="$(pkg-config --static --cflags libxml-2.0)"
-    LIBXML2_LIBS="$(pkg-config --static --libs libxml-2.0 | sed -e 's| -l| -l:lib|g').a"
+    LIBXML2_LIBS="$(pkg-config --static --libs libxml-2.0 | sed -E 's/-l([^ ]+)/-l:lib\1.a/g')"
     export LIBXML2_CFLAGS LIBXML2_LIBS
 
     # Configure and build 64-bit
@@ -175,10 +175,10 @@ build_wine() {
         export PKG_CONFIG_PATH="${PKG_CONFIG_LIBDIR}"
         export CROSSCC="${CROSSCC_X32}"
         XKBCOMMON_CFLAGS="$(pkg-config --static --cflags xkbcommon)"
-        XKBCOMMON_LIBS="$(pkg-config --static --libs xkbcommon | sed -e 's| -l| -l:lib|').a"
+        XKBCOMMON_LIBS="$(pkg-config --static --libs xkbcommon | sed -E 's/-l([^ ]+)/-l:lib\1.a/g')"
         export XKBCOMMON_CFLAGS XKBCOMMON_LIBS
         LIBXML2_CFLAGS="$(pkg-config --static --cflags libxml-2.0)"
-        LIBXML2_LIBS="$(pkg-config --static --libs libxml-2.0 | sed -e 's| -l| -l:lib|g').a"
+        LIBXML2_LIBS="$(pkg-config --static --libs libxml-2.0 | sed -E 's/-l([^ ]+)/-l:lib\1.a/g')"
         export LIBXML2_CFLAGS LIBXML2_LIBS
 
         # export I386_LIBS="-latomic" required for older fsync
@@ -328,8 +328,8 @@ compiler_setup() {
         LLVM_MINGW_PATH="/usr/local/llvm-mingw"
         export PATH="${LLVM_MINGW_PATH}/bin:${PATH}"
 
-        export LIBRARY_PATH="${LLVM_MINGW_PATH}/lib:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14/32:/usr/lib/gcc-14/lib:/usr/lib/gcc-14/lib32:/usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LIBRARY_PATH:-}"
-        export LD_LIBRARY_PATH="${LLVM_MINGW_PATH}/lib:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14/32:/usr/lib/gcc-14/lib:/usr/lib/gcc-14/lib32:/usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LD_LIBRARY_PATH:-}"
+        export LIBRARY_PATH="${LLVM_MINGW_PATH}/lib:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14/32:/usr/lib/gcc-14/lib:/usr/lib/gcc-14/lib32:/usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/x86_64/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LIBRARY_PATH:-}"
+        export LD_LIBRARY_PATH="${LLVM_MINGW_PATH}/lib:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14/32:/usr/lib/gcc-14/lib:/usr/lib/gcc-14/lib32:/usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/x86_64/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LD_LIBRARY_PATH:-}"
 
         # Compiler settings
         export CC="ccache gcc"
@@ -347,8 +347,8 @@ compiler_setup() {
         GCC_MINGW_PATH="/usr/local/gcc-mingw"
         export PATH="${GCC_MINGW_PATH}/bin:${PATH}"
 
-        export LIBRARY_PATH="/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14/32:/usr/lib/gcc-14/lib:/usr/lib/gcc-14/lib32:/usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LIBRARY_PATH:-}"
-        export LD_LIBRARY_PATH="/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14/32:/usr/lib/gcc-14/lib:/usr/lib/gcc-14/lib32:/usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LD_LIBRARY_PATH:-}"
+        export LIBRARY_PATH="/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14/32:/usr/lib/gcc-14/lib:/usr/lib/gcc-14/lib32:/usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/x86_64/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LIBRARY_PATH:-}"
+        export LD_LIBRARY_PATH="/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14:/usr/lib/gcc-14/lib/gcc/x86_64-linux-gnu/14/32:/usr/lib/gcc-14/lib:/usr/lib/gcc-14/lib32:/usr/lib:/usr/lib/x86_64-linux-gnu:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/x86_64/lib/x86_64-linux-gnu:/usr/local/i386/lib/i386-linux-gnu:/usr/local/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:${LD_LIBRARY_PATH:-}"
 
         export CC="ccache gcc"
         export CXX="ccache g++"
