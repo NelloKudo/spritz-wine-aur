@@ -1,4 +1,4 @@
-From d61f9311a1c1f0d1a167d38d3998f96ea493dc1c Mon Sep 17 00:00:00 2001
+From ca106ca33e01480786ce8c9d210a2cf0001cbf43 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Sat, 7 Feb 2026 22:35:47 +0100
 Subject: [PATCH 07/10] wdfldr.sys: Add stub dll.
@@ -14,10 +14,10 @@ Subject: [PATCH 07/10] wdfldr.sys: Add stub dll.
  create mode 100644 dlls/wdfldr.sys/wdfldr_main.c
 
 diff --git a/configure.ac b/configure.ac
-index f6b0aba4dd3..26004f01fe4 100644
+index 13dca86c55e..d43530d52e4 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -3318,6 +3318,7 @@ WINE_CONFIG_MAKEFILE(dlls/wbemdisp)
+@@ -3296,6 +3296,7 @@ WINE_CONFIG_MAKEFILE(dlls/wbemdisp)
  WINE_CONFIG_MAKEFILE(dlls/wbemdisp/tests)
  WINE_CONFIG_MAKEFILE(dlls/wbemprox)
  WINE_CONFIG_MAKEFILE(dlls/wbemprox/tests)
@@ -149,5 +149,5 @@ index 00000000000..419c50b1b44
 +    return STATUS_SUCCESS;
 +}
 -- 
-2.53.0
+2.54.0
 

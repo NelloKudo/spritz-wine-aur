@@ -1,4 +1,4 @@
-From 24f67ed6726f8a1c9cd0357e0bdd5a506c72580b Mon Sep 17 00:00:00 2001
+From f4ed9ea14f285e9267bb2bccf90f9744cfe23d15 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Sun, 1 Feb 2026 01:54:17 +0100
 Subject: [PATCH 1/4] win32u: Add SetIMEEnabled driver call.
@@ -9,7 +9,7 @@ Subject: [PATCH 1/4] win32u: Add SetIMEEnabled driver call.
  2 files changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/win32u/driver.c b/dlls/win32u/driver.c
-index c9e81016ee8..3804ce8225b 100644
+index 4d9708f377c..cdbffb5c616 100644
 --- a/dlls/win32u/driver.c
 +++ b/dlls/win32u/driver.c
 @@ -684,6 +684,11 @@ static BOOL nulldrv_SetIMECompositionRect( HWND hwnd, RECT rect )
@@ -37,7 +37,7 @@ index c9e81016ee8..3804ce8225b 100644
                                               DWORD flags, LPVOID lparam )
  {
 @@ -1257,6 +1267,7 @@ static const struct user_driver_funcs lazy_load_driver =
-     loaderdrv_ImeProcessKey,
+     loaderdrv_ImeToAsciiEx,
      loaderdrv_NotifyIMEStatus,
      loaderdrv_SetIMECompositionRect,
 +    loaderdrv_SetIMEEnabled,
@@ -45,7 +45,7 @@ index c9e81016ee8..3804ce8225b 100644
      nulldrv_DestroyCursorIcon,
      loaderdrv_SetCursor,
 @@ -1361,6 +1372,7 @@ void __wine_set_user_driver( const struct user_driver_funcs *funcs, UINT version
-     SET_USER_FUNC(ImeProcessKey);
+     SET_USER_FUNC(ImeToAsciiEx);
      SET_USER_FUNC(NotifyIMEStatus);
      SET_USER_FUNC(SetIMECompositionRect);
 +    SET_USER_FUNC(SetIMEEnabled);
@@ -53,7 +53,7 @@ index c9e81016ee8..3804ce8225b 100644
      SET_USER_FUNC(SetCursor);
      SET_USER_FUNC(GetCursorPos);
 diff --git a/include/wine/gdi_driver.h b/include/wine/gdi_driver.h
-index f6390bce878..07e8d160691 100644
+index 97c646d6ec9..8050ff95bf0 100644
 --- a/include/wine/gdi_driver.h
 +++ b/include/wine/gdi_driver.h
 @@ -218,7 +218,7 @@ struct gdi_dc_funcs
@@ -66,7 +66,7 @@ index f6390bce878..07e8d160691 100644
  #define GDI_PRIORITY_NULL_DRV        0  /* null driver */
  #define GDI_PRIORITY_FONT_DRV      100  /* any font driver */
 @@ -375,6 +375,7 @@ struct user_driver_funcs
-     UINT    (*pImeProcessKey)(HIMC,UINT,UINT,const BYTE*);
+     UINT    (*pImeToAsciiEx)(UINT,UINT,const BYTE*,HIMC);
      void    (*pNotifyIMEStatus)(HWND,UINT);
      BOOL    (*pSetIMECompositionRect)(HWND,RECT);
 +    BOOL    (*pSetIMEEnabled)(HWND,BOOL);
@@ -74,5 +74,5 @@ index f6390bce878..07e8d160691 100644
      void    (*pDestroyCursorIcon)(HCURSOR);
      void    (*pSetCursor)(HWND,HCURSOR);
 -- 
-2.53.0
+2.54.0
 

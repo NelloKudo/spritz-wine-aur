@@ -1,4 +1,4 @@
-From 794702c9f15f11c9b899f3d5da478fe539150e16 Mon Sep 17 00:00:00 2001
+From e291ba4291ba8d94bf1b1216adbe4cba16ebf6b5 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 21 Sep 2025 14:49:22 -0500
@@ -100,5 +100,5 @@ index 307417ae843..b17b79b0264 100644
  
  static const struct wp_fractional_scale_v1_listener wp_fractional_scale_listener =
 -- 
-2.53.0
+2.54.0
 

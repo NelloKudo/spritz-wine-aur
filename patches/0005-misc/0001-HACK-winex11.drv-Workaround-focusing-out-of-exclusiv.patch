@@ -1,4 +1,4 @@
-From 7f135b76ff44cda835ba7d6f0bb738218f08e5ea Mon Sep 17 00:00:00 2001
+From 201d801db4d008e381c9d8916a0d34262997a339 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 14 Dec 2022 21:21:50 +0100
 Subject: [PATCH 01/10] HACK: winex11.drv: Workaround focusing out of exclusive
@@ -28,7 +28,7 @@ Original commits were:
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/winex11.drv/window.c b/dlls/winex11.drv/window.c
-index b43cfc55e05..a3453726154 100644
+index 33dc2b5a8e0..9e345c23efa 100644
 --- a/dlls/winex11.drv/window.c
 +++ b/dlls/winex11.drv/window.c
 @@ -1500,7 +1500,15 @@ static void update_net_wm_states( struct x11drv_win_data *data )
@@ -49,5 +49,5 @@ index b43cfc55e05..a3453726154 100644
      if (!data->add_taskbar)
      {
 -- 
-2.53.0
+2.54.0
 

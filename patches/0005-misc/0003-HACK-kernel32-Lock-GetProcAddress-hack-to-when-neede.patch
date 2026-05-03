@@ -1,4 +1,4 @@
-From f464178d8314275c5642191c825693f9489879c2 Mon Sep 17 00:00:00 2001
+From 2ffc18e7c375296b36a0589fe1e9ea9ddb881a45 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Sat, 24 Jan 2026 00:15:44 +0100
 Subject: [PATCH 03/10] HACK: kernel32: Lock GetProcAddress hack to when
@@ -61,5 +61,5 @@ index 6c0152c9ca6..461f57ae627 100644
              FIXME( "HACK: returning int3 stub instead of %s\n", function );
              return (FARPROC)&int3_stub;
 -- 
-2.53.0
+2.54.0
 

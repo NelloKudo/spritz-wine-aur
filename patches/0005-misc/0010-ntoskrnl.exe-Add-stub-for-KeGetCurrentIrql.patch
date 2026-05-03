@@ -1,4 +1,4 @@
-From 1b32a21f85aecfa3a0b6002af28c6cda3437fabf Mon Sep 17 00:00:00 2001
+From 1451795f16f471f494173c7bfc3130e41763c368 Mon Sep 17 00:00:00 2001
 From: Quitting <quitthefake@gmail.com>
 Date: Sun, 15 Feb 2026 00:29:46 +0100
 Subject: [PATCH 10/10] ntoskrnl.exe: Add stub for KeGetCurrentIrql.
@@ -53,5 +53,5 @@ index daab993aa1f..a331ac06b2b 100644
  @ stub KeGetRecommendedSharedDataAlignment
  @ stub KeI386AbiosCall
 -- 
-2.53.0
+2.54.0
 

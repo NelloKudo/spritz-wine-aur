@@ -1,4 +1,4 @@
-From a63ff82617243c544cd8ce96788aa8322674513a Mon Sep 17 00:00:00 2001
+From 7b040fc495f2f838dae3c3315623e191c862c04a Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:53:06 -0400
@@ -45,5 +45,5 @@ index d316ca36466..003a18e597d 100644
  @ stub KeReleaseMutant
  @ stdcall KeReleaseMutex(ptr long)
 -- 
-2.53.0
+2.54.0
 

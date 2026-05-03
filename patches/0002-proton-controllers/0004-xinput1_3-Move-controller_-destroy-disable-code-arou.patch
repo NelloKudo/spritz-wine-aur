@@ -1,4 +1,4 @@
-From 6533f763cc488112cb438fb235ac1a68d7348cc5 Mon Sep 17 00:00:00 2001
+From 2d61f47a5942dafb65c366964b0ce215440d222e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 23 Nov 2022 01:02:13 +0100
 Subject: [PATCH 4/7] xinput1_3: Move controller_(destroy|disable) code around.
@@ -102,5 +102,5 @@ index c1ad48e3fc4..4fd9e42f7ca 100644
  {
      UINT sign = 1 << (caps->BitSize - 1);
 -- 
-2.53.0
+2.54.0
 

@@ -1,4 +1,4 @@
-From ed883e99a7ebafe067518c14aa289fbaa2ede96c Mon Sep 17 00:00:00 2001
+From 14c3fc7acd0036d31c88a1162c3ac294cf4e4a59 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 25 Jan 2026 16:11:18 -0600
@@ -11,7 +11,7 @@ Some applications are very timing sensitive.
  1 file changed, 20 insertions(+), 5 deletions(-)
 
 diff --git a/dlls/ntdll/unix/sync.c b/dlls/ntdll/unix/sync.c
-index ee1d630087b..ec7fd1393a8 100644
+index c59f272de3b..ba2a31a7fc9 100644
 --- a/dlls/ntdll/unix/sync.c
 +++ b/dlls/ntdll/unix/sync.c
 @@ -2435,16 +2435,31 @@ NTSTATUS WINAPI NtDelayExecution( BOOLEAN alertable, const LARGE_INTEGER *timeou
@@ -52,5 +52,5 @@ index ee1d630087b..ec7fd1393a8 100644
          /* Note that we yield after establishing the desired timeout, but
             we only care about the result of the yield for zero timeouts */
 -- 
-2.53.0
+2.54.0
 

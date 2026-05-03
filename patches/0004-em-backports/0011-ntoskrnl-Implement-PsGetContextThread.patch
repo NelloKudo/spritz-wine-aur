@@ -1,4 +1,4 @@
-From ca95b0f91adfcbd8371fb82f29538e3f1678f582 Mon Sep 17 00:00:00 2001
+From 939859140810b5987fa91c9d85da664d35f930eb Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 01:06:02 -0400
@@ -51,5 +51,5 @@ index a538c7ed5f1..3b5fbf02f85 100644
  @ stdcall PsGetCurrentProcessId()
  @ stdcall PsGetCurrentProcessSessionId()
 -- 
-2.53.0
+2.54.0
 

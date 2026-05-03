@@ -1,4 +1,4 @@
-From 34b91cb80f2af261520459a35602346ef4d4a3f9 Mon Sep 17 00:00:00 2001
+From 157c21033859f4bb7c89fd2fdc71eba2bb147386 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Tue, 20 Jan 2026 16:33:26 +0100
 Subject: [PATCH 02/10] HACK: kernel32: Spoof GetProcAddress of
@@ -46,5 +46,5 @@ index ac880100d38..6c0152c9ca6 100644
          if (!set_ntstatus( LdrGetProcedureAddress( hModule, &str, 0, (void**)&fp ))) return NULL;
      }
 -- 
-2.53.0
+2.54.0
 

@@ -1,4 +1,4 @@
-From 36a98231a7bb0dc1ede9ae5332967aa9313916c8 Mon Sep 17 00:00:00 2001
+From a23393dc7ed55db88b463e083e9f7f475b5cd45e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 5 Oct 2025 23:29:10 -0500
@@ -25,10 +25,10 @@ index b17b79b0264..f8461ac0eb7 100644
  
              TRACE("Got scale %lf\n", surface->window.fractional_scale);
 diff --git a/dlls/winewayland.drv/window.c b/dlls/winewayland.drv/window.c
-index 6692893d063..16386e3349d 100644
+index 7ee6570a705..7647900cdbb 100644
 --- a/dlls/winewayland.drv/window.c
 +++ b/dlls/winewayland.drv/window.c
-@@ -173,7 +173,7 @@ static void wayland_win_data_get_config(struct wayland_win_data *data,
+@@ -175,7 +175,7 @@ static void wayland_win_data_get_config(struct wayland_win_data *data,
      }
  
      conf->state = window_state;
@@ -38,5 +38,5 @@ index 6692893d063..16386e3349d 100644
      conf->managed = data->managed;
  }
 -- 
-2.53.0
+2.54.0
 

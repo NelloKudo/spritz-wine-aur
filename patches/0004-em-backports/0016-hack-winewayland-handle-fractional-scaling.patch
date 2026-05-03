@@ -1,4 +1,4 @@
-From b4ec981ccd8f6730fc406b4355befbcea15f9736 Mon Sep 17 00:00:00 2001
+From 0f222b5e8963d0ae5d1b90885cec6c95fc5c6fbc Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 6 May 2025 09:06:03 -0400
@@ -227,7 +227,7 @@ index 2f8275ddb52..04d6b0a095e 100644
      {
          wp_viewport_destroy(surface->wp_viewport);
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 3b0c300a1f6..1006fb7cd8d 100644
+index 110db8ba0c4..59706a81494 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
 @@ -38,6 +38,7 @@
@@ -255,7 +255,7 @@ index 3b0c300a1f6..1006fb7cd8d 100644
      /* The scale (i.e., normalized dpi) the window is rendering at. */
      double scale;
      BOOL visible;
-@@ -265,6 +269,7 @@ struct wayland_surface
+@@ -266,6 +270,7 @@ struct wayland_surface
  
      struct wl_surface *wl_surface;
      struct wp_viewport *wp_viewport;
@@ -264,10 +264,10 @@ index 3b0c300a1f6..1006fb7cd8d 100644
      struct wayland_shm_buffer *big_icon_buffer;
  
 diff --git a/dlls/winewayland.drv/window.c b/dlls/winewayland.drv/window.c
-index 2c3d1f87408..6692893d063 100644
+index 88eee3421d7..7ee6570a705 100644
 --- a/dlls/winewayland.drv/window.c
 +++ b/dlls/winewayland.drv/window.c
-@@ -173,7 +173,7 @@ static void wayland_win_data_get_config(struct wayland_win_data *data,
+@@ -175,7 +175,7 @@ static void wayland_win_data_get_config(struct wayland_win_data *data,
      }
  
      conf->state = window_state;
@@ -277,5 +277,5 @@ index 2c3d1f87408..6692893d063 100644
      conf->managed = data->managed;
  }
 -- 
-2.53.0
+2.54.0
 

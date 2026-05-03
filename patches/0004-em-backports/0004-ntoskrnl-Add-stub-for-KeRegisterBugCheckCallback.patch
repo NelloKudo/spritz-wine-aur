@@ -1,4 +1,4 @@
-From 66b5aa267a9888cad73488233de38199849c4788 Mon Sep 17 00:00:00 2001
+From b0a64a9b1a9fc4faeb3a7dccaf2fdb1e997f496e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:48:42 -0400
@@ -45,5 +45,5 @@ index 557f9cb8fd9..d316ca36466 100644
  @ stub KeReleaseInterruptSpinLock
  @ stub KeReleaseMutant
 -- 
-2.53.0
+2.54.0
 

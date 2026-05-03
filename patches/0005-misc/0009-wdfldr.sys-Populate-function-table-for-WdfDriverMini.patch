@@ -1,4 +1,4 @@
-From 567c32c5bb761735d6788e3ccb21452dbba08aaf Mon Sep 17 00:00:00 2001
+From dd55fa9eb1180b485b58130a2763e8c0669e246b Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Sun, 15 Feb 2026 00:19:49 +0100
 Subject: [PATCH 09/10] wdfldr.sys: Populate function table for
@@ -45,5 +45,5 @@ index dd370237ed6..b50e81cee0c 100644
  
      client_info->globals.Size = sizeof(WDF_COMPONENT_GLOBALS);
 -- 
-2.53.0
+2.54.0
 

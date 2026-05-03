@@ -1,4 +1,4 @@
-From d7f088da6ef5a2c9fd7426d3cee5efc1752756fa Mon Sep 17 00:00:00 2001
+From a089cdbe6c89bbf0a78938bc716fa9fd93c8abc0 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:39:47 -0400
@@ -188,5 +188,5 @@ index 48db065c368..d2f30b79177 100644
  NTSTATUS kernel_object_from_handle( HANDLE handle, POBJECT_TYPE type, void **ret );
  
 -- 
-2.53.0
+2.54.0
 

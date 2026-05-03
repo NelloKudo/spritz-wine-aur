@@ -1,4 +1,4 @@
-From c9779e163b88762edb56cd4277e3e3a23a569420 Mon Sep 17 00:00:00 2001
+From 72f39dac490ba54cfb0f9ac09574e3bebac6d9e8 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:06:22 -0400
@@ -43,5 +43,5 @@ index 8fadc6d26d5..557f9cb8fd9 100644
  @ stub PsGetThreadSessionId
  @ stub PsGetThreadTeb
 -- 
-2.53.0
+2.54.0
 
